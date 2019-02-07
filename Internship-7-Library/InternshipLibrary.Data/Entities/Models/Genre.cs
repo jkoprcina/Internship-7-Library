@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InternshipLibrary.Data.Models
+namespace InternshipLibrary.Data.Entities.Models
 {
     public class Genre
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
         public ICollection<Book> Books { get; set; }
     }
 }

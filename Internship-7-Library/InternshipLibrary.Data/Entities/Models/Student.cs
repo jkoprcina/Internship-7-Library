@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InternshipLibrary.Data.Enums;
 
-namespace InternshipLibrary.Data.Models
+namespace InternshipLibrary.Data.Entities.Models
 {
     public class Student
     {
@@ -14,5 +14,8 @@ namespace InternshipLibrary.Data.Models
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Gender Gender { get; set; }
+
+        public Class Class { get; set; }
+        public ICollection<Borrowing> Borrowings { get; set; }
     }
 }
