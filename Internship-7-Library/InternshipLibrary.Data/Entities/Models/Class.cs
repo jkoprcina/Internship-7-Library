@@ -13,5 +13,16 @@ namespace InternshipLibrary.Data.Entities.Models
         public int Number { get; set; }
 
         public ICollection<Student> Students { get; set; }
+
+        public Class(char letter, int number)
+        {
+            Letter = letter;
+            Number = number;
+        }
+
+        public override string ToString()
+        {
+            return $"{Number} {Letter}";
+        }
     }
 }

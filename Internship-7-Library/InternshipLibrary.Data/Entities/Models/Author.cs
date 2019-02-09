@@ -13,5 +13,16 @@ namespace InternshipLibrary.Data.Entities.Models
         public string LastName { get; set; }
 
         public ICollection<Book> Books { get; set; }
+
+        public Author(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+        }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }

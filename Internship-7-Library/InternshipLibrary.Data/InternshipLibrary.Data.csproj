@@ -125,19 +125,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Entities\LibraryContext.cs" />
     <Compile Include="Entities\Models\Borrowing.cs" />
     <Compile Include="Enums\Gender.cs" />
     <Compile Include="Entities\Models\Author.cs" />
     <Compile Include="Entities\Models\Book.cs" />
     <Compile Include="Entities\Models\Class.cs" />
-    <Compile Include="Entities\Models\Genre.cs" />
     <Compile Include="Entities\Models\Publisher.cs" />
     <Compile Include="Entities\Models\Student.cs" />
-    <Compile Include="Migrations\20190206194005_InitialCreate.cs" />
-    <Compile Include="Migrations\20190206194005_InitialCreate.designer.cs">
-      <DependentUpon>20190206194005_InitialCreate.cs</DependentUpon>
+    <Compile Include="Enums\Genre.cs" />
+    <Compile Include="Migrations\20190209154621_Initial.cs" />
+    <Compile Include="Migrations\20190209154621_Initial.designer.cs">
+      <DependentUpon>20190209154621_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\LibraryContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

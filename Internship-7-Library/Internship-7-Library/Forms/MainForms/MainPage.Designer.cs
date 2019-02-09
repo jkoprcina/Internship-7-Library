@@ -1,6 +1,6 @@
-﻿namespace Internship_7_Library
+﻿namespace Internship_7_Library.Forms
 {
-    partial class Form1
+    partial class MainPage
     {
         /// <summary>
         /// Required designer variable.
@@ -36,16 +36,12 @@
             this.RemoveStudentBtn = new System.Windows.Forms.Button();
             this.AddStudentBtn = new System.Windows.Forms.Button();
             this.Exit = new System.Windows.Forms.Button();
-            this.RemoveAuthorBtn = new System.Windows.Forms.Button();
-            this.AddAuthorBtn = new System.Windows.Forms.Button();
             this.StudentLbx = new System.Windows.Forms.ListBox();
-            this.EditClassBtn = new System.Windows.Forms.Button();
-            this.RemoveClassBtn = new System.Windows.Forms.Button();
-            this.AddClassBtn = new System.Windows.Forms.Button();
-            this.EditAuthorBtn = new System.Windows.Forms.Button();
-            this.EditPublisherBtn = new System.Windows.Forms.Button();
-            this.RemovePublisherBtn = new System.Windows.Forms.Button();
-            this.AddNewPublisher = new System.Windows.Forms.Button();
+            this.BorrowBtn = new System.Windows.Forms.Button();
+            this.ReturnBtn = new System.Windows.Forms.Button();
+            this.AuthorBtn = new System.Windows.Forms.Button();
+            this.PublisherBtn = new System.Windows.Forms.Button();
+            this.ClassBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BooksLbx
@@ -64,6 +60,7 @@
             this.AddBookBtn.TabIndex = 1;
             this.AddBookBtn.Text = "Add New Book";
             this.AddBookBtn.UseVisualStyleBackColor = true;
+            this.AddBookBtn.Click += new System.EventHandler(this.AddBookBtn_Click);
             // 
             // RemoveBookBtn
             // 
@@ -73,6 +70,7 @@
             this.RemoveBookBtn.TabIndex = 2;
             this.RemoveBookBtn.Text = "Remove Book";
             this.RemoveBookBtn.UseVisualStyleBackColor = true;
+            this.RemoveBookBtn.Click += new System.EventHandler(this.RemoveBookBtn_Click);
             // 
             // EditBookBtn
             // 
@@ -82,6 +80,7 @@
             this.EditBookBtn.TabIndex = 3;
             this.EditBookBtn.Text = "Edit Book";
             this.EditBookBtn.UseVisualStyleBackColor = true;
+            this.EditBookBtn.Click += new System.EventHandler(this.EditBookBtn_Click);
             // 
             // EditStudentBtn
             // 
@@ -91,6 +90,7 @@
             this.EditStudentBtn.TabIndex = 6;
             this.EditStudentBtn.Text = "Edit Student";
             this.EditStudentBtn.UseVisualStyleBackColor = true;
+            this.EditStudentBtn.Click += new System.EventHandler(this.EditStudentBtn_Click);
             // 
             // RemoveStudentBtn
             // 
@@ -100,6 +100,7 @@
             this.RemoveStudentBtn.TabIndex = 5;
             this.RemoveStudentBtn.Text = "Remove Student";
             this.RemoveStudentBtn.UseVisualStyleBackColor = true;
+            this.RemoveStudentBtn.Click += new System.EventHandler(this.RemoveStudentBtn_Click);
             // 
             // AddStudentBtn
             // 
@@ -109,6 +110,7 @@
             this.AddStudentBtn.TabIndex = 4;
             this.AddStudentBtn.Text = "Add New Student";
             this.AddStudentBtn.UseVisualStyleBackColor = true;
+            this.AddStudentBtn.Click += new System.EventHandler(this.AddStudentBtn_Click);
             // 
             // Exit
             // 
@@ -118,112 +120,78 @@
             this.Exit.TabIndex = 9;
             this.Exit.Text = "Exit";
             this.Exit.UseVisualStyleBackColor = true;
-            // 
-            // RemoveAuthorBtn
-            // 
-            this.RemoveAuthorBtn.Location = new System.Drawing.Point(12, 309);
-            this.RemoveAuthorBtn.Name = "RemoveAuthorBtn";
-            this.RemoveAuthorBtn.Size = new System.Drawing.Size(151, 66);
-            this.RemoveAuthorBtn.TabIndex = 8;
-            this.RemoveAuthorBtn.Text = "Remove Author";
-            this.RemoveAuthorBtn.UseVisualStyleBackColor = true;
-            // 
-            // AddAuthorBtn
-            // 
-            this.AddAuthorBtn.Location = new System.Drawing.Point(12, 238);
-            this.AddAuthorBtn.Name = "AddAuthorBtn";
-            this.AddAuthorBtn.Size = new System.Drawing.Size(151, 66);
-            this.AddAuthorBtn.TabIndex = 7;
-            this.AddAuthorBtn.Text = "Add New Author";
-            this.AddAuthorBtn.UseVisualStyleBackColor = true;
+            this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // StudentLbx
             // 
             this.StudentLbx.FormattingEnabled = true;
-            this.StudentLbx.Location = new System.Drawing.Point(491, 12);
+            this.StudentLbx.Location = new System.Drawing.Point(469, 12);
             this.StudentLbx.Name = "StudentLbx";
-            this.StudentLbx.Size = new System.Drawing.Size(294, 641);
+            this.StudentLbx.Size = new System.Drawing.Size(300, 641);
             this.StudentLbx.TabIndex = 10;
             // 
-            // EditClassBtn
+            // BorrowBtn
             // 
-            this.EditClassBtn.Location = new System.Drawing.Point(791, 381);
-            this.EditClassBtn.Name = "EditClassBtn";
-            this.EditClassBtn.Size = new System.Drawing.Size(151, 66);
-            this.EditClassBtn.TabIndex = 13;
-            this.EditClassBtn.Text = "Edit Class";
-            this.EditClassBtn.UseVisualStyleBackColor = true;
+            this.BorrowBtn.Location = new System.Drawing.Point(791, 419);
+            this.BorrowBtn.Name = "BorrowBtn";
+            this.BorrowBtn.Size = new System.Drawing.Size(151, 74);
+            this.BorrowBtn.TabIndex = 11;
+            this.BorrowBtn.Text = "Borrow";
+            this.BorrowBtn.UseVisualStyleBackColor = true;
+            this.BorrowBtn.Click += new System.EventHandler(this.BorrowBtn_Click);
             // 
-            // RemoveClassBtn
+            // ReturnBtn
             // 
-            this.RemoveClassBtn.Location = new System.Drawing.Point(791, 309);
-            this.RemoveClassBtn.Name = "RemoveClassBtn";
-            this.RemoveClassBtn.Size = new System.Drawing.Size(151, 66);
-            this.RemoveClassBtn.TabIndex = 12;
-            this.RemoveClassBtn.Text = "Remove Class";
-            this.RemoveClassBtn.UseVisualStyleBackColor = true;
+            this.ReturnBtn.Location = new System.Drawing.Point(791, 499);
+            this.ReturnBtn.Name = "ReturnBtn";
+            this.ReturnBtn.Size = new System.Drawing.Size(151, 74);
+            this.ReturnBtn.TabIndex = 12;
+            this.ReturnBtn.Text = "Return";
+            this.ReturnBtn.UseVisualStyleBackColor = true;
+            this.ReturnBtn.Click += new System.EventHandler(this.ReturnBtn_Click);
             // 
-            // AddClassBtn
+            // AuthorBtn
             // 
-            this.AddClassBtn.Location = new System.Drawing.Point(791, 238);
-            this.AddClassBtn.Name = "AddClassBtn";
-            this.AddClassBtn.Size = new System.Drawing.Size(151, 66);
-            this.AddClassBtn.TabIndex = 11;
-            this.AddClassBtn.Text = "Add New Class";
-            this.AddClassBtn.UseVisualStyleBackColor = true;
+            this.AuthorBtn.Location = new System.Drawing.Point(12, 419);
+            this.AuthorBtn.Name = "AuthorBtn";
+            this.AuthorBtn.Size = new System.Drawing.Size(151, 74);
+            this.AuthorBtn.TabIndex = 13;
+            this.AuthorBtn.Text = "Authors";
+            this.AuthorBtn.UseVisualStyleBackColor = true;
+            this.AuthorBtn.Click += new System.EventHandler(this.AuthorBtn_Click);
             // 
-            // EditAuthorBtn
+            // PublisherBtn
             // 
-            this.EditAuthorBtn.Location = new System.Drawing.Point(12, 381);
-            this.EditAuthorBtn.Name = "EditAuthorBtn";
-            this.EditAuthorBtn.Size = new System.Drawing.Size(151, 66);
-            this.EditAuthorBtn.TabIndex = 14;
-            this.EditAuthorBtn.Text = "Edit Author";
-            this.EditAuthorBtn.UseVisualStyleBackColor = true;
+            this.PublisherBtn.Location = new System.Drawing.Point(12, 499);
+            this.PublisherBtn.Name = "PublisherBtn";
+            this.PublisherBtn.Size = new System.Drawing.Size(151, 74);
+            this.PublisherBtn.TabIndex = 14;
+            this.PublisherBtn.Text = "Publishers";
+            this.PublisherBtn.UseVisualStyleBackColor = true;
+            this.PublisherBtn.Click += new System.EventHandler(this.PublisherBtn_Click);
             // 
-            // EditPublisherBtn
+            // ClassBtn
             // 
-            this.EditPublisherBtn.Location = new System.Drawing.Point(12, 596);
-            this.EditPublisherBtn.Name = "EditPublisherBtn";
-            this.EditPublisherBtn.Size = new System.Drawing.Size(151, 66);
-            this.EditPublisherBtn.TabIndex = 17;
-            this.EditPublisherBtn.Text = "Edit Publisher";
-            this.EditPublisherBtn.UseVisualStyleBackColor = true;
+            this.ClassBtn.Location = new System.Drawing.Point(12, 579);
+            this.ClassBtn.Name = "ClassBtn";
+            this.ClassBtn.Size = new System.Drawing.Size(151, 70);
+            this.ClassBtn.TabIndex = 15;
+            this.ClassBtn.Text = "Classes";
+            this.ClassBtn.UseVisualStyleBackColor = true;
+            this.ClassBtn.Click += new System.EventHandler(this.ClassBtn_Click);
             // 
-            // RemovePublisherBtn
-            // 
-            this.RemovePublisherBtn.Location = new System.Drawing.Point(12, 524);
-            this.RemovePublisherBtn.Name = "RemovePublisherBtn";
-            this.RemovePublisherBtn.Size = new System.Drawing.Size(151, 66);
-            this.RemovePublisherBtn.TabIndex = 16;
-            this.RemovePublisherBtn.Text = "Remove Publisher";
-            this.RemovePublisherBtn.UseVisualStyleBackColor = true;
-            // 
-            // AddNewPublisher
-            // 
-            this.AddNewPublisher.Location = new System.Drawing.Point(12, 453);
-            this.AddNewPublisher.Name = "AddNewPublisher";
-            this.AddNewPublisher.Size = new System.Drawing.Size(151, 66);
-            this.AddNewPublisher.TabIndex = 15;
-            this.AddNewPublisher.Text = "Add New Publisher";
-            this.AddNewPublisher.UseVisualStyleBackColor = true;
-            // 
-            // Form1
+            // MainPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(955, 674);
-            this.Controls.Add(this.EditPublisherBtn);
-            this.Controls.Add(this.RemovePublisherBtn);
-            this.Controls.Add(this.AddNewPublisher);
-            this.Controls.Add(this.EditAuthorBtn);
-            this.Controls.Add(this.EditClassBtn);
-            this.Controls.Add(this.RemoveClassBtn);
-            this.Controls.Add(this.AddClassBtn);
+            this.Controls.Add(this.ClassBtn);
+            this.Controls.Add(this.PublisherBtn);
+            this.Controls.Add(this.AuthorBtn);
+            this.Controls.Add(this.ReturnBtn);
+            this.Controls.Add(this.BorrowBtn);
             this.Controls.Add(this.StudentLbx);
             this.Controls.Add(this.Exit);
-            this.Controls.Add(this.RemoveAuthorBtn);
-            this.Controls.Add(this.AddAuthorBtn);
             this.Controls.Add(this.EditStudentBtn);
             this.Controls.Add(this.RemoveStudentBtn);
             this.Controls.Add(this.AddStudentBtn);
@@ -231,7 +199,7 @@
             this.Controls.Add(this.RemoveBookBtn);
             this.Controls.Add(this.AddBookBtn);
             this.Controls.Add(this.BooksLbx);
-            this.Name = "Form1";
+            this.Name = "MainPage";
             this.Text = "Form1";
             this.ResumeLayout(false);
 
@@ -247,16 +215,12 @@
         private System.Windows.Forms.Button RemoveStudentBtn;
         private System.Windows.Forms.Button AddStudentBtn;
         private System.Windows.Forms.Button Exit;
-        private System.Windows.Forms.Button RemoveAuthorBtn;
-        private System.Windows.Forms.Button AddAuthorBtn;
         private System.Windows.Forms.ListBox StudentLbx;
-        private System.Windows.Forms.Button EditClassBtn;
-        private System.Windows.Forms.Button RemoveClassBtn;
-        private System.Windows.Forms.Button AddClassBtn;
-        private System.Windows.Forms.Button EditAuthorBtn;
-        private System.Windows.Forms.Button EditPublisherBtn;
-        private System.Windows.Forms.Button RemovePublisherBtn;
-        private System.Windows.Forms.Button AddNewPublisher;
+        private System.Windows.Forms.Button BorrowBtn;
+        private System.Windows.Forms.Button ReturnBtn;
+        private System.Windows.Forms.Button AuthorBtn;
+        private System.Windows.Forms.Button PublisherBtn;
+        private System.Windows.Forms.Button ClassBtn;
     }
 }
 

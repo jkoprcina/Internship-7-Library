@@ -48,6 +48,7 @@
             this.ExitBtn.TabIndex = 3;
             this.ExitBtn.Text = "Exit";
             this.ExitBtn.UseVisualStyleBackColor = true;
+            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
             // AddBtn
             // 
@@ -58,6 +59,7 @@
             this.AddBtn.TabIndex = 2;
             this.AddBtn.Text = "Add";
             this.AddBtn.UseVisualStyleBackColor = true;
+            this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
             // FirstNameTxt
             // 

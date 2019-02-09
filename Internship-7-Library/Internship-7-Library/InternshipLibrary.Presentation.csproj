@@ -111,11 +111,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\AddForms\AddAuthorForm.cs">
+    <Compile Include="Forms\MainForms\AuthorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AddForms\AddAuthorForm.Designer.cs">
-      <DependentUpon>AddAuthorForm.cs</DependentUpon>
+    <Compile Include="Forms\MainForms\AuthorForm.Designer.cs">
+      <DependentUpon>AuthorForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForms\ClassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForms\ClassForm.Designer.cs">
+      <DependentUpon>ClassForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\AddForms\AddBookForm.cs">
       <SubType>Form</SubType>
@@ -123,29 +129,11 @@
     <Compile Include="Forms\AddForms\AddBookForm.Designer.cs">
       <DependentUpon>AddBookForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AddForms\AddClassForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AddForms\AddClassForm.Designer.cs">
-      <DependentUpon>AddClassForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AddForms\AddPublisherForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AddForms\AddPublisherForm.Designer.cs">
-      <DependentUpon>AddPublisherForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\AddForms\AddStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AddForms\AddStudentForm.Designer.cs">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\EditForms\EditAuthorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EditForms\EditAuthorForm.Designer.cs">
-      <DependentUpon>EditAuthorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\EditForms\EditBookForm.cs">
       <SubType>Form</SubType>
@@ -153,91 +141,46 @@
     <Compile Include="Forms\EditForms\EditBookForm.Designer.cs">
       <DependentUpon>EditBookForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditForms\EditClassForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EditForms\EditClassForm.Designer.cs">
-      <DependentUpon>EditClassForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\EditForms\EditPublisherForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EditForms\EditPublisherForm.Designer.cs">
-      <DependentUpon>EditPublisherForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\EditForms\EditStudentForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\EditForms\EditStudentForm.Designer.cs">
       <DependentUpon>EditStudentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MainPage.cs">
+    <Compile Include="Forms\MainForms\MainPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainPage.Designer.cs">
+    <Compile Include="Forms\MainForms\MainPage.Designer.cs">
       <DependentUpon>MainPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RemoveForms\RemoveAuthorForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RemoveForms\RemoveAuthorForm.Designer.cs">
-      <DependentUpon>RemoveAuthorForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RemoveForms\RemoveClassForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RemoveForms\RemoveClassForm.Designer.cs">
-      <DependentUpon>RemoveClassForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\RemoveForms\RemovePublisherForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\RemoveForms\RemovePublisherForm.Designer.cs">
-      <DependentUpon>RemovePublisherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\AddForms\AddAuthorForm.resx">
-      <DependentUpon>AddAuthorForm.cs</DependentUpon>
+    <Compile Include="Forms\MainForms\PublisherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForms\PublisherForm.Designer.cs">
+      <DependentUpon>PublisherForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\MainForms\AuthorForm.resx">
+      <DependentUpon>AuthorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForms\ClassForm.resx">
+      <DependentUpon>ClassForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddForms\AddBookForm.resx">
       <DependentUpon>AddBookForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddForms\AddClassForm.resx">
-      <DependentUpon>AddClassForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\AddForms\AddPublisherForm.resx">
-      <DependentUpon>AddPublisherForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddForms\AddStudentForm.resx">
       <DependentUpon>AddStudentForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditForms\EditAuthorForm.resx">
-      <DependentUpon>EditAuthorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditForms\EditBookForm.resx">
       <DependentUpon>EditBookForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditForms\EditClassForm.resx">
-      <DependentUpon>EditClassForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditForms\EditPublisherForm.resx">
-      <DependentUpon>EditPublisherForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditForms\EditStudentForm.resx">
       <DependentUpon>EditStudentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainPage.resx">
+    <EmbeddedResource Include="Forms\MainForms\MainPage.resx">
       <DependentUpon>MainPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RemoveForms\RemoveAuthorForm.resx">
-      <DependentUpon>RemoveAuthorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RemoveForms\RemoveClassForm.resx">
-      <DependentUpon>RemoveClassForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\RemoveForms\RemovePublisherForm.resx">
-      <DependentUpon>RemovePublisherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -248,6 +191,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\MainForms\PublisherForm.resx">
+      <DependentUpon>PublisherForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -263,9 +209,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InternshipLibrary.Data\InternshipLibrary.Data.csproj">
+      <Project>{6280CBF9-286C-48B8-94F2-DF4A8D93E915}</Project>
+      <Name>InternshipLibrary.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InternshipLibrary.Domain\InternshipLibrary.Domain.csproj">
       <Project>{5dd8cad3-882f-43f5-8336-793e339ca318}</Project>
       <Name>InternshipLibrary.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InternshipLibrary.Extensions\InternshipLibrary.Extensions.csproj">
+      <Project>{56506245-f6d1-4ff6-a5c5-6485dff3f53f}</Project>
+      <Name>InternshipLibrary.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

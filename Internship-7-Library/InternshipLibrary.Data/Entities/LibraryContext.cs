@@ -20,7 +20,6 @@ namespace InternshipLibrary.Data.Entities
         public DbSet<Book> Books { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Publisher> Publishers { get; set; }
-        public DbSet<Genre> Genres { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Borrowing> Borrowings { get; set; }
         public DbSet<Author> Authors { get; set; }

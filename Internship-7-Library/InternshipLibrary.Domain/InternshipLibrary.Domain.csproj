@@ -109,13 +109,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AuthorRepository.cs" />
+    <Compile Include="Repositories\BookRepository.cs" />
+    <Compile Include="Repositories\ClassRepository.cs" />
+    <Compile Include="Repositories\PublisherRepository.cs" />
+    <Compile Include="Repositories\StudentRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InternshipLibrary.Data\InternshipLibrary.Data.csproj">
       <Project>{6280cbf9-286c-48b8-94f2-df4a8d93e915}</Project>
       <Name>InternshipLibrary.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InternshipLibrary.Extensions\InternshipLibrary.Extensions.csproj">
+      <Project>{56506245-f6d1-4ff6-a5c5-6485dff3f53f}</Project>
+      <Name>InternshipLibrary.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

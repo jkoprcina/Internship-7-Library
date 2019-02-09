@@ -17,5 +17,17 @@ namespace InternshipLibrary.Data.Entities.Models
 
         public Class Class { get; set; }
         public ICollection<Borrowing> Borrowings { get; set; }
+
+        public Student(string firstName, string lastName, DateTime dateOfBirth)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+        }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName} {DateOfBirth.Date}";
+        }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace InternshipLibrary.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,19 +34,6 @@ namespace InternshipLibrary.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Classes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Genres",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Genres", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -93,7 +80,8 @@ namespace InternshipLibrary.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     PageNumber = table.Column<int>(nullable: false),
-                    GenreId = table.Column<int>(nullable: true),
+                    NumberOfBooks = table.Column<int>(nullable: false),
+                    Genre = table.Column<int>(nullable: false),
                     AuthorId = table.Column<int>(nullable: true),
                     PublisherId = table.Column<int>(nullable: true)
                 },
@@ -104,12 +92,6 @@ namespace InternshipLibrary.Data.Migrations
                         name: "FK_Books_Authors_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Authors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Books_Genres_GenreId",
-                        column: x => x.GenreId,
-                        principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -154,11 +136,6 @@ namespace InternshipLibrary.Data.Migrations
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_GenreId",
-                table: "Books",
-                column: "GenreId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Books_PublisherId",
                 table: "Books",
                 column: "PublisherId");
@@ -192,9 +169,6 @@ namespace InternshipLibrary.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Authors");
-
-            migrationBuilder.DropTable(
-                name: "Genres");
 
             migrationBuilder.DropTable(
                 name: "Publishers");

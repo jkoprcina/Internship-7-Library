@@ -7,12 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InternshipLibrary.Data.Entities.Models;
 
 namespace Internship_7_Library.Forms.EditForms
 {
     public partial class EditStudentForm : Form
     {
-        public EditStudentForm()
+        public EditStudentForm(Student student)
         {
             InitializeComponent();
         }

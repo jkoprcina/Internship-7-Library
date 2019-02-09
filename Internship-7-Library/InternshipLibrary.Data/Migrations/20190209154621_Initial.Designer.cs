@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InternshipLibrary.Data.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20190206194005_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190209154621_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,9 +44,11 @@ namespace InternshipLibrary.Data.Migrations
 
                     b.Property<int?>("AuthorId");
 
-                    b.Property<int?>("GenreId");
+                    b.Property<int>("Genre");
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("NumberOfBooks");
 
                     b.Property<int>("PageNumber");
 
@@ -55,8 +57,6 @@ namespace InternshipLibrary.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AuthorId");
-
-                    b.HasIndex("GenreId");
 
                     b.HasIndex("PublisherId");
 
@@ -103,19 +103,6 @@ namespace InternshipLibrary.Data.Migrations
                     b.ToTable("Classes");
                 });
 
-            modelBuilder.Entity("InternshipLibrary.Data.Entities.Models.Genre", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Genres");
-                });
-
             modelBuilder.Entity("InternshipLibrary.Data.Entities.Models.Publisher", b =>
                 {
                     b.Property<int>("Id")
@@ -157,10 +144,6 @@ namespace InternshipLibrary.Data.Migrations
                     b.HasOne("InternshipLibrary.Data.Entities.Models.Author", "Author")
                         .WithMany("Books")
                         .HasForeignKey("AuthorId");
-
-                    b.HasOne("InternshipLibrary.Data.Entities.Models.Genre", "Genre")
-                        .WithMany("Books")
-                        .HasForeignKey("GenreId");
 
                     b.HasOne("InternshipLibrary.Data.Entities.Models.Publisher", "Publisher")
                         .WithMany("Books")

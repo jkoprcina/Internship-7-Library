@@ -95,6 +95,7 @@
             this.ExitBtn.TabIndex = 7;
             this.ExitBtn.Text = "Exit";
             this.ExitBtn.UseVisualStyleBackColor = true;
+            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
             // AddBtn
             // 
@@ -105,6 +106,7 @@
             this.AddBtn.TabIndex = 6;
             this.AddBtn.Text = "Add";
             this.AddBtn.UseVisualStyleBackColor = true;
+            this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
             // AddBookForm
             // 
