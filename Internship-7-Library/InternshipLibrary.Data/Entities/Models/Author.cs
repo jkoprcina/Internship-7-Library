@@ -14,6 +14,10 @@ namespace InternshipLibrary.Data.Entities.Models
 
         public ICollection<Book> Books { get; set; }
 
+        public Author()
+        {
+        }
+
         public Author(string firstName, string lastName)
         {
             FirstName = firstName;

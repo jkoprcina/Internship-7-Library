@@ -19,15 +19,23 @@ namespace InternshipLibrary.Data.Entities.Models
         public Publisher Publisher { get; set; }
         public ICollection<Borrowing> Borrowings { get; set; }
 
-        public Book(string name, int pageNumber)
+        public Book()
+        {
+        }
+
+        public Book(string name, int pageNumber, int numberOfBooks, Author author, Publisher publisher, Genre genre)
         {
             Name = name;
             PageNumber = pageNumber;
+            NumberOfBooks = numberOfBooks;
+            Author = author;
+            Publisher = publisher;
+            Genre = genre;
         }
 
         public override string ToString()
         {
-            return $"{Name} Number:{NumberOfBooks}";
+            return $"{Name} Number:{NumberOfBooks} Author:{Author} Publisher:{Publisher}";
         }
     }
 }

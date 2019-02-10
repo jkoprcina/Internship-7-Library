@@ -2,6 +2,7 @@
 using InternshipLibrary.Data.Entities.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,10 +34,11 @@ namespace InternshipLibrary.Domain.Repositories
             return _context.Authors.ToList();
         }
 
-        public void Update(Author author, int id)
+        public void Update(Author newAuthor, Author oldAuthor)
         {
-            _context.Authors.Remove(Read(id));
-            _context.Authors.Add(author);
+            newAuthor.Id = oldAuthor.Id;
+            _context.Remove(oldAuthor);
+            _context.Authors.Add(newAuthor);
             _context.SaveChanges();
         }
 

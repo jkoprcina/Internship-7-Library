@@ -14,6 +14,10 @@ namespace InternshipLibrary.Data.Entities.Models
 
         public ICollection<Student> Students { get; set; }
 
+        public Class()
+        {
+        }
+
         public Class(char letter, int number)
         {
             Letter = letter;

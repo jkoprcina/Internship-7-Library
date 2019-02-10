@@ -36,6 +36,9 @@
             this.AuthorLbx = new System.Windows.Forms.ListBox();
             this.ExitBtn = new System.Windows.Forms.Button();
             this.AddBtn = new System.Windows.Forms.Button();
+            this.NumberOfBooksLbl = new System.Windows.Forms.Label();
+            this.NumberOfBooksTxt = new System.Windows.Forms.TextBox();
+            this.GenreLbx = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // NameLbl
@@ -73,7 +76,7 @@
             // PublisherLbx
             // 
             this.PublisherLbx.FormattingEnabled = true;
-            this.PublisherLbx.Location = new System.Drawing.Point(35, 236);
+            this.PublisherLbx.Location = new System.Drawing.Point(34, 416);
             this.PublisherLbx.Name = "PublisherLbx";
             this.PublisherLbx.Size = new System.Drawing.Size(189, 134);
             this.PublisherLbx.TabIndex = 4;
@@ -81,7 +84,7 @@
             // AuthorLbx
             // 
             this.AuthorLbx.FormattingEnabled = true;
-            this.AuthorLbx.Location = new System.Drawing.Point(35, 99);
+            this.AuthorLbx.Location = new System.Drawing.Point(34, 279);
             this.AuthorLbx.Name = "AuthorLbx";
             this.AuthorLbx.Size = new System.Drawing.Size(189, 121);
             this.AuthorLbx.TabIndex = 5;
@@ -89,7 +92,7 @@
             // ExitBtn
             // 
             this.ExitBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitBtn.Location = new System.Drawing.Point(137, 398);
+            this.ExitBtn.Location = new System.Drawing.Point(136, 578);
             this.ExitBtn.Name = "ExitBtn";
             this.ExitBtn.Size = new System.Drawing.Size(111, 59);
             this.ExitBtn.TabIndex = 7;
@@ -100,7 +103,7 @@
             // AddBtn
             // 
             this.AddBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddBtn.Location = new System.Drawing.Point(12, 398);
+            this.AddBtn.Location = new System.Drawing.Point(11, 578);
             this.AddBtn.Name = "AddBtn";
             this.AddBtn.Size = new System.Drawing.Size(111, 59);
             this.AddBtn.TabIndex = 6;
@@ -108,11 +111,38 @@
             this.AddBtn.UseVisualStyleBackColor = true;
             this.AddBtn.Click += new System.EventHandler(this.AddBtn_Click);
             // 
+            // NumberOfBooksLbl
+            // 
+            this.NumberOfBooksLbl.AutoSize = true;
+            this.NumberOfBooksLbl.Location = new System.Drawing.Point(32, 96);
+            this.NumberOfBooksLbl.Name = "NumberOfBooksLbl";
+            this.NumberOfBooksLbl.Size = new System.Drawing.Size(93, 13);
+            this.NumberOfBooksLbl.TabIndex = 8;
+            this.NumberOfBooksLbl.Text = "Number of copies:";
+            // 
+            // NumberOfBooksTxt
+            // 
+            this.NumberOfBooksTxt.Location = new System.Drawing.Point(157, 96);
+            this.NumberOfBooksTxt.Name = "NumberOfBooksTxt";
+            this.NumberOfBooksTxt.Size = new System.Drawing.Size(67, 20);
+            this.NumberOfBooksTxt.TabIndex = 9;
+            // 
+            // GenreLbx
+            // 
+            this.GenreLbx.FormattingEnabled = true;
+            this.GenreLbx.Location = new System.Drawing.Point(34, 141);
+            this.GenreLbx.Name = "GenreLbx";
+            this.GenreLbx.Size = new System.Drawing.Size(189, 121);
+            this.GenreLbx.TabIndex = 10;
+            // 
             // AddBookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(259, 469);
+            this.ClientSize = new System.Drawing.Size(259, 656);
+            this.Controls.Add(this.GenreLbx);
+            this.Controls.Add(this.NumberOfBooksTxt);
+            this.Controls.Add(this.NumberOfBooksLbl);
             this.Controls.Add(this.ExitBtn);
             this.Controls.Add(this.AddBtn);
             this.Controls.Add(this.AuthorLbx);
@@ -138,5 +168,8 @@
         private System.Windows.Forms.ListBox AuthorLbx;
         private System.Windows.Forms.Button ExitBtn;
         private System.Windows.Forms.Button AddBtn;
+        private System.Windows.Forms.Label NumberOfBooksLbl;
+        private System.Windows.Forms.TextBox NumberOfBooksTxt;
+        private System.Windows.Forms.ListBox GenreLbx;
     }
 }

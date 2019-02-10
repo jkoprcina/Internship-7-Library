@@ -34,10 +34,11 @@ namespace InternshipLibrary.Domain.Repositories
             return _context.Books.ToList();
         }
 
-        public void Update(Book book, string name)
+        public void Update(Book newBook, Book oldBook)
         {
-            _context.Books.Remove(Read(name));
-            _context.Books.Add(book);
+            newBook.Id = oldBook.Id;
+            _context.Books.Remove(oldBook);
+            _context.Books.Add(newBook);
             _context.SaveChanges();
         }
 

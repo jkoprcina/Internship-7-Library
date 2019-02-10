@@ -47,7 +47,8 @@ namespace Internship_7_Library.Forms.AddForms
             if (FirstNameTxt.Text != "" && LastNameTxt.Text != ""
                 && ClassLbx.SelectedIndex > -1 && GenderLbx.SelectedIndex > -1)
             {
-                _studentRepository.Create(new Student(FirstNameTxt.Text, LastNameTxt.Text, DateOfBirthDtp.Value));
+                _studentRepository.Create(new Student(FirstNameTxt.Text, LastNameTxt.Text, DateOfBirthDtp.Value, 
+                    ClassLbx.SelectedItem as Class, (Gender)GenderLbx.SelectedItem));
             }
             else
             {

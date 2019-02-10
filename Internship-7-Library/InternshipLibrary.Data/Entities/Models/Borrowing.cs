@@ -17,10 +17,16 @@ namespace InternshipLibrary.Data.Entities.Models
         public Book Book { get; set; }
         public Student Student { get; set; }
 
-        public Borrowing(DateTime dateOfBorrowing, DateTime dateOfReturn)
+        public Borrowing()
+        {
+        }
+
+        public Borrowing(DateTime dateOfBorrowing, DateTime dateOfReturn, Book book, Student student)
         {
             DateOfBorrowing = dateOfBorrowing;
             DateOfReturn = dateOfReturn;
+            Book = book;
+            Student = student;
         }
     }
 }

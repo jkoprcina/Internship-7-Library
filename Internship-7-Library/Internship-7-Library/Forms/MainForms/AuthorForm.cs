@@ -62,7 +62,20 @@ namespace Internship_7_Library.Forms.MainForms
         //Update author button
         private void EditAuthorBtn_Click(object sender, EventArgs e)
         {
-
+            if (FirstNameTxt.Text == "" || LastNameTxt.Text == "")
+            {
+                MessageBox.Show("You must enter a first and last name");
+                return;
+            }
+            if (AuthorsLbx.SelectedIndex > -1)
+            {
+                _authorRepository.Update(new Author(FirstNameTxt.Text, LastNameTxt.Text),AuthorsLbx.SelectedItem as Author);
+            }
+            else
+            {
+                MessageBox.Show("Please first choose the author you wish to edit");
+            }
+            ClearAndFillForm();
         }
     }
 }

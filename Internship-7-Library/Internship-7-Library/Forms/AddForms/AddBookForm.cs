@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using InternshipLibrary.Data.Entities.Models;
+using InternshipLibrary.Data.Enums;
 
 namespace Internship_7_Library.Forms.AddForms
 {
@@ -31,10 +32,13 @@ namespace Internship_7_Library.Forms.AddForms
         {
             AuthorLbx.Items.Clear();
             PublisherLbx.Items.Clear();
+            GenreLbx.Items.Clear();
             foreach (var author in _authorRepository.Read())
                 AuthorLbx.Items.Add(author);
             foreach (var publisher in _publisherRepository.Read())
                 PublisherLbx.Items.Add(publisher);
+            foreach (var genre in Enum.GetValues(typeof(Genre)).Cast<Genre>())
+                GenreLbx.Items.Add(genre);
         }
 
         //Exiting the form
@@ -47,24 +51,26 @@ namespace Internship_7_Library.Forms.AddForms
         {
             try
             {
+                MessageBox.Show("Inside try");
                 if (_bookRepository.Read().Contains(_bookRepository.Read(NameTxt.Text)))
                 {
                     Console.WriteLine("The name must not exist already");
                     return;
                 }
 
-                if (NameTxt.Text != "" && PageNumberTxt.Text != "" && AuthorLbx.SelectedIndex > -1
-                    && PublisherLbx.SelectedIndex > -1)
+                if (NameTxt.Text != "" && PageNumberTxt.Text != "" && NumberOfBooksTxt.Text != "" && AuthorLbx.SelectedIndex > -1
+                    && PublisherLbx.SelectedIndex > -1 && GenreLbx.SelectedIndex > -1)
                 {
-                    _bookRepository.Create(new Book(NameTxt.Text, int.Parse(PageNumberTxt.Text)));
-                    MessageBox.Show("OK");
+                    MessageBox.Show("new created");
+                    _bookRepository.Create(new Book(NameTxt.Text, int.Parse(PageNumberTxt.Text), int.Parse(NumberOfBooksTxt.Text),
+                        AuthorLbx.SelectedItem as Author, PublisherLbx.SelectedItem as Publisher, (Genre)GenreLbx.SelectedItem));
+                    Close();
                 }
                 else
                 {
                     MessageBox.Show("All info must be filled/selected");
                     return;
                 }
-                Close();
             }
             catch
             {

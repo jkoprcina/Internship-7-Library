@@ -33,10 +33,11 @@ namespace InternshipLibrary.Domain.Repositories
             return _context.Publishers.ToList();
         }
 
-        public void Update(Publisher publisher, int id)
+        public void Update(Publisher newPublisher, Publisher oldPublisher)
         {
-            _context.Publishers.Remove(Read(id));
-            _context.Publishers.Add(publisher);
+            newPublisher.Id = oldPublisher.Id;
+            _context.Publishers.Remove(oldPublisher);
+            _context.Publishers.Add(newPublisher);
             _context.SaveChanges();
         }
 

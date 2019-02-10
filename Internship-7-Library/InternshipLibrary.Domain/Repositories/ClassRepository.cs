@@ -33,10 +33,11 @@ namespace InternshipLibrary.Domain.Repositories
             return _context.Classes.ToList();
         }
 
-        public void Update(Class schoolClass, int id)
+        public void Update(Class newSchoolClass, Class oldSchoolClass)
         {
-            _context.Classes.Remove(Read(id));
-            _context.Classes.Add(schoolClass);
+            newSchoolClass.Id = oldSchoolClass.Id;
+            _context.Classes.Remove(oldSchoolClass);
+            _context.Classes.Add(newSchoolClass);
             _context.SaveChanges();
         }
 

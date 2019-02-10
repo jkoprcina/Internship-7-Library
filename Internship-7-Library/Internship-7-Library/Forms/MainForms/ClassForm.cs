@@ -50,7 +50,7 @@ namespace Internship_7_Library
                         if (int.Parse(YearTxt.Text) == schoolClass.Number &&
                             char.Parse(LetterTxt.Text) == schoolClass.Letter)
                         {
-                            MessageBox.Show("That author already exists");
+                            MessageBox.Show("That class already exists");
                             return;
                         }
                     }
@@ -80,7 +80,33 @@ namespace Internship_7_Library
         //Update class button
         private void EditClassBtn_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (YearTxt.Text == "" || LetterTxt.Text == "")
+                {
+                    MessageBox.Show("You must enter a first and last name");
+                    return;
+                }
+                else
+                {
+                    foreach (var schoolClass in _classRepository.Read())
+                    {
+                        if (int.Parse(YearTxt.Text) == schoolClass.Number &&
+                            char.Parse(LetterTxt.Text) == schoolClass.Letter)
+                        {
+                            MessageBox.Show("That class already exists");
+                            return;
+                        }
+                    }
+                }
+                _classRepository.Update(new Class(char.Parse(LetterTxt.Text), int.Parse(YearTxt.Text)), ClassLbx.SelectedItem as Class);
+                ClearAndFillForm();
+            }
+            catch
+            {
+                MessageBox.Show("Wrong input");
+                return;
+            }
         }
     }
 }

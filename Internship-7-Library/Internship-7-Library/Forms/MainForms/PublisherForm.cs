@@ -76,7 +76,24 @@ namespace Internship_7_Library
         //Update publisher button
         private void EditPublisherBtn_Click(object sender, EventArgs e)
         {
-
+            if (NameTxt.Text == "")
+            {
+                MessageBox.Show("You must enter a first and last name");
+                return;
+            }
+            else
+            {
+                foreach (var publisher in _publisherRepository.Read())
+                {
+                    if (NameTxt.Text == publisher.Name)
+                    {
+                        MessageBox.Show("That author already exists");
+                        return;
+                    }
+                }
+            }
+            _publisherRepository.Update(new Publisher(NameTxt.Text), PublisherLbx.SelectedItem as Publisher);
+            ClearAndFillForm();
         }
     }
 }
