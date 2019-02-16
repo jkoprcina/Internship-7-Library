@@ -104,6 +104,7 @@
             this.ExitBtn.TabIndex = 12;
             this.ExitBtn.Text = "Exit";
             this.ExitBtn.UseVisualStyleBackColor = true;
+            this.ExitBtn.Click += new System.EventHandler(this.ExitBtn_Click);
             // 
             // EditBtn
             // 
@@ -114,6 +115,7 @@
             this.EditBtn.TabIndex = 11;
             this.EditBtn.Text = "Edit";
             this.EditBtn.UseVisualStyleBackColor = true;
+            this.EditBtn.Click += new System.EventHandler(this.EditBtn_Click);
             // 
             // EditStudentForm
             // 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InternshipLibrary.Data.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20190209154621_Initial")]
-    partial class Initial
+    [Migration("20190216155410_Books changed")]
+    partial class Bookschanged
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -48,7 +48,9 @@ namespace InternshipLibrary.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("NumberOfBooks");
+                    b.Property<int>("NumberOfBooksAvailable");
+
+                    b.Property<int>("NumberOfBooksBorrowed");
 
                     b.Property<int>("PageNumber");
 

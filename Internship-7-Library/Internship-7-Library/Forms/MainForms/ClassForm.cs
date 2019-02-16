@@ -30,6 +30,8 @@ namespace Internship_7_Library
             ClassLbx.Items.Clear();
             foreach (var schoolClass in _classRepository.Read())
                 ClassLbx.Items.Add(schoolClass);
+            LetterTxt.Text = "";
+            YearTxt.Text = "";
         }
 
         //Create, Update, Delete class

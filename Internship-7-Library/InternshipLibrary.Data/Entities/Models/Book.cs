@@ -12,7 +12,8 @@ namespace InternshipLibrary.Data.Entities.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public int PageNumber { get; set; }
-        public int NumberOfBooks { get; set; }
+        public int NumberOfBooksAvailable { get; set; }
+        public int NumberOfBooksBorrowed { get; set; }
 
         public Genre Genre { get; set; }
         public Author Author { get; set; }
@@ -23,11 +24,13 @@ namespace InternshipLibrary.Data.Entities.Models
         {
         }
 
-        public Book(string name, int pageNumber, int numberOfBooks, Author author, Publisher publisher, Genre genre)
+        public Book(string name, int pageNumber, int numberOfBooksAvailable, Author author, 
+            Publisher publisher, Genre genre, int numberOfBooksBorrowed = 0)
         {
             Name = name;
             PageNumber = pageNumber;
-            NumberOfBooks = numberOfBooks;
+            NumberOfBooksAvailable = numberOfBooksAvailable;
+            NumberOfBooksBorrowed = numberOfBooksBorrowed;
             Author = author;
             Publisher = publisher;
             Genre = genre;
@@ -35,7 +38,7 @@ namespace InternshipLibrary.Data.Entities.Models
 
         public override string ToString()
         {
-            return $"{Name} Number:{NumberOfBooks} Author:{Author} Publisher:{Publisher}";
+            return $"{Name} Author:{Author.FirstName} Publisher:{Publisher.Name} Number:{NumberOfBooksAvailable}";
         }
     }
 }

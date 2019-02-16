@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using InternshipLibrary.Data.Entities;
 using InternshipLibrary.Data.Entities.Models;
+using InternshipLibrary.Extensions.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace InternshipLibrary.Domain.Repositories
 {
@@ -19,6 +21,7 @@ namespace InternshipLibrary.Domain.Repositories
 
         public void Create(Student student)
         {
+            _context.Attach(student.Class);
             _context.Students.Add(student);
             _context.SaveChanges();
         }
@@ -30,13 +33,16 @@ namespace InternshipLibrary.Domain.Repositories
 
         public List<Student> Read()
         {
-            return _context.Students.ToList();
+            return _context.Students.Include(student => student.Class).ToList();
         }
 
-        public void Update(Student student, int id)
+        public void Update(Student oldStudent, Student newStudent)
         {
-            _context.Students.Remove(Read(id));
-            _context.Students.Add(student);
+            oldStudent.FirstName = newStudent.FirstName;
+            oldStudent.LastName = newStudent.LastName;
+            oldStudent.Class = newStudent.Class;
+            oldStudent.DateOfBirth = newStudent.DateOfBirth;
+            oldStudent.Gender = newStudent.Gender;
             _context.SaveChanges();
         }
 

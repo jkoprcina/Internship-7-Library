@@ -134,9 +134,17 @@
     <Compile Include="Entities\Models\Publisher.cs" />
     <Compile Include="Entities\Models\Student.cs" />
     <Compile Include="Enums\Genre.cs" />
-    <Compile Include="Migrations\20190209154621_Initial.cs" />
-    <Compile Include="Migrations\20190209154621_Initial.designer.cs">
-      <DependentUpon>20190209154621_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\20190215163655_InitialCreate.cs" />
+    <Compile Include="Migrations\20190215163655_InitialCreate.designer.cs">
+      <DependentUpon>20190215163655_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190215171646_Test.cs" />
+    <Compile Include="Migrations\20190215171646_Test.designer.cs">
+      <DependentUpon>20190215171646_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190216155410_Books changed.cs" />
+    <Compile Include="Migrations\20190216155410_Books changed.designer.cs">
+      <DependentUpon>20190216155410_Books changed.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\LibraryContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -147,6 +155,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

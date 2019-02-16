@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InternshipLibrary.Data.Entities;
 using InternshipLibrary.Data.Entities.Models;
+using InternshipLibrary.Extensions.Extensions;
 
 namespace InternshipLibrary.Domain.Repositories
 {

@@ -19,6 +19,7 @@ namespace InternshipLibrary.Domain.Repositories
 
         public void Create(Class schoolClass)
         {
+            schoolClass.Letter = char.ToUpper(schoolClass.Letter);
             _context.Classes.Add(schoolClass);
             _context.SaveChanges();
         }
@@ -37,6 +38,7 @@ namespace InternshipLibrary.Domain.Repositories
         {
             newSchoolClass.Id = oldSchoolClass.Id;
             _context.Classes.Remove(oldSchoolClass);
+            newSchoolClass.Letter = char.ToUpper(newSchoolClass.Letter);
             _context.Classes.Add(newSchoolClass);
             _context.SaveChanges();
         }

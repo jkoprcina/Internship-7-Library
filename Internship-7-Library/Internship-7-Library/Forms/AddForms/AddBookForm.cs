@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InternshipLibrary.Data.Entities.Models;
 using InternshipLibrary.Data.Enums;
+using InternshipLibrary.Extensions.Extensions;
 
 namespace Internship_7_Library.Forms.AddForms
 {
@@ -51,19 +52,17 @@ namespace Internship_7_Library.Forms.AddForms
         {
             try
             {
-                MessageBox.Show("Inside try");
-                if (_bookRepository.Read().Contains(_bookRepository.Read(NameTxt.Text)))
+                if(int.Parse(NumberOfBooksTxt.Text) < 1)
                 {
-                    Console.WriteLine("The name must not exist already");
+                    MessageBox.Show("The book must have at least one page and there must be a minimum of one copy");
                     return;
                 }
-
                 if (NameTxt.Text != "" && PageNumberTxt.Text != "" && NumberOfBooksTxt.Text != "" && AuthorLbx.SelectedIndex > -1
                     && PublisherLbx.SelectedIndex > -1 && GenreLbx.SelectedIndex > -1)
                 {
-                    MessageBox.Show("new created");
-                    _bookRepository.Create(new Book(NameTxt.Text, int.Parse(PageNumberTxt.Text), int.Parse(NumberOfBooksTxt.Text),
-                        AuthorLbx.SelectedItem as Author, PublisherLbx.SelectedItem as Publisher, (Genre)GenreLbx.SelectedItem));
+                    _bookRepository.Create(new Book(NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), int.Parse(PageNumberTxt.Text), 
+                        int.Parse(NumberOfBooksTxt.Text), AuthorLbx.SelectedItem as Author, 
+                        PublisherLbx.SelectedItem as Publisher, (Genre)GenreLbx.SelectedItem));
                     Close();
                 }
                 else

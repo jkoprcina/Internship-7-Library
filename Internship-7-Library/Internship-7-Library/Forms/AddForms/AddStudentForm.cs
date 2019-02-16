@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using InternshipLibrary.Data.Entities.Models;
 using InternshipLibrary.Data.Enums;
 using InternshipLibrary.Domain.Repositories;
+using InternshipLibrary.Extensions.Extensions;
 
 namespace Internship_7_Library.Forms.AddForms
 {
@@ -47,7 +48,8 @@ namespace Internship_7_Library.Forms.AddForms
             if (FirstNameTxt.Text != "" && LastNameTxt.Text != ""
                 && ClassLbx.SelectedIndex > -1 && GenderLbx.SelectedIndex > -1)
             {
-                _studentRepository.Create(new Student(FirstNameTxt.Text, LastNameTxt.Text, DateOfBirthDtp.Value, 
+                _studentRepository.Create(new Student(FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), 
+                    LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), DateOfBirthDtp.Value, 
                     ClassLbx.SelectedItem as Class, (Gender)GenderLbx.SelectedItem));
             }
             else

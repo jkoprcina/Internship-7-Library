@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InternshipLibrary.Domain.Repositories;
 using InternshipLibrary.Data.Entities.Models;
+using InternshipLibrary.Extensions.Extensions;
 using Publisher = InternshipLibrary.Data.Entities.Models.Publisher;
 
 namespace Internship_7_Library
@@ -30,6 +31,7 @@ namespace Internship_7_Library
             PublisherLbx.Items.Clear();
             foreach (var publisher in _publisherRepository.Read())
                 PublisherLbx.Items.Add(publisher);
+            NameTxt.Text = "";
         }
 
         //Exiting the form
@@ -55,7 +57,7 @@ namespace Internship_7_Library
                     }
                 }
             }
-            _publisherRepository.Create(new Publisher(NameTxt.Text));
+            _publisherRepository.Create(new Publisher(NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords()));
             ClearAndFillForm();
         }
         //Delete publisher button

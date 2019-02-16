@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using InternshipLibrary.Data.Entities.Models;
 using InternshipLibrary.Domain.Repositories;
+using InternshipLibrary.Extensions.Extensions;
 
 namespace Internship_7_Library.Forms.MainForms
 {
@@ -21,6 +22,8 @@ namespace Internship_7_Library.Forms.MainForms
             AuthorsLbx.Items.Clear();
             foreach (var author in _authorRepository.Read())
                 AuthorsLbx.Items.Add(author);
+            FirstNameTxt.Text = "";
+            LastNameTxt.Text = "";
         }
 
         //Exiting the form
@@ -43,7 +46,8 @@ namespace Internship_7_Library.Forms.MainForms
                     return;
                 }
             }
-            _authorRepository.Create(new Author(FirstNameTxt.Text, LastNameTxt.Text));
+            _authorRepository.Create(new Author(FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), 
+                LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords()));
             ClearAndFillForm();
         }
         //Delete author button

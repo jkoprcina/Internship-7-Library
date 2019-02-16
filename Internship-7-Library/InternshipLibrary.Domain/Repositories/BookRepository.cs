@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InternshipLibrary.Data.Entities;
 using InternshipLibrary.Data.Entities.Models;
-using InternshipLibrary.Extensions.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace InternshipLibrary.Domain.Repositories
 {
@@ -13,32 +10,31 @@ namespace InternshipLibrary.Domain.Repositories
     {
         private readonly LibraryContext _context;
 
-        public BookRepository()
-        {
-            _context = new LibraryContext();
-        }
+        public BookRepository() => _context = new LibraryContext();
 
         public void Create(Book book)
         {
-            _context.Books.Add(book);
+            _context.Attach(book.Publisher);
+            _context.Attach(book.Author);
+            _context.Add(book);
             _context.SaveChanges();
         }
 
-        public Book Read(string name)
-        {
-            return _context.Books.Find(name);
-        }
+        public Book Read(int id) => _context.Books.Find(id);
 
         public List<Book> Read()
         {
-            return _context.Books.ToList();
+            return _context.Books.Include(book => book.Publisher).Include(aut => aut.Author).ToList();
         }
 
-        public void Update(Book newBook, Book oldBook)
+        public void Update(Book oldBook, Book newBook)
         {
-            newBook.Id = oldBook.Id;
-            _context.Books.Remove(oldBook);
-            _context.Books.Add(newBook);
+            oldBook.Name = newBook.Name;
+            oldBook.Publisher = newBook.Publisher;
+            oldBook.Author = newBook.Author;
+            oldBook.NumberOfBooksAvailable = newBook.NumberOfBooksAvailable;
+            oldBook.PageNumber = newBook.PageNumber;
+            oldBook.Genre = newBook.Genre;
             _context.SaveChanges();
         }
 
