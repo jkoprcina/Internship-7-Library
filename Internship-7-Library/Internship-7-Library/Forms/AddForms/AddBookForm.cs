@@ -60,9 +60,15 @@ namespace Internship_7_Library.Forms.AddForms
                 if (NameTxt.Text != "" && PageNumberTxt.Text != "" && NumberOfBooksTxt.Text != "" && AuthorLbx.SelectedIndex > -1
                     && PublisherLbx.SelectedIndex > -1 && GenreLbx.SelectedIndex > -1)
                 {
-                    _bookRepository.Create(new Book(NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), int.Parse(PageNumberTxt.Text), 
-                        int.Parse(NumberOfBooksTxt.Text), AuthorLbx.SelectedItem as Author, 
-                        PublisherLbx.SelectedItem as Publisher, (Genre)GenreLbx.SelectedItem));
+                    _bookRepository.Create(new Book
+                    {
+                        Name = NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
+                        PageNumber = int.Parse(PageNumberTxt.Text),
+                        NumberOfBooksAvailable = int.Parse(NumberOfBooksTxt.Text),
+                        Publisher = PublisherLbx.SelectedItem as Publisher,
+                        Genre = (Genre)GenreLbx.SelectedItem,
+                        Author = AuthorLbx.SelectedItem as Author
+                    });
                     Close();
                 }
                 else
@@ -71,9 +77,9 @@ namespace Internship_7_Library.Forms.AddForms
                     return;
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                Console.WriteLine("Wrong input");
+                MessageBox.Show(ex.ToString());
                 return;
             }
         }

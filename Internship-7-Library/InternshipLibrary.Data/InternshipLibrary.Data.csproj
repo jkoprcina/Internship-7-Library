@@ -150,6 +150,18 @@
     <Compile Include="Migrations\20190217103735_Added loan to student and IsReturned to book.designer.cs">
       <DependentUpon>20190217103735_Added loan to student and IsReturned to book.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190217144815_Borrowing id name change.cs" />
+    <Compile Include="Migrations\20190217144815_Borrowing id name change.designer.cs">
+      <DependentUpon>20190217144815_Borrowing id name change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190217150324_Adding weird key to borrowing.cs" />
+    <Compile Include="Migrations\20190217150324_Adding weird key to borrowing.designer.cs">
+      <DependentUpon>20190217150324_Adding weird key to borrowing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190217171050_Trying to fix id.cs" />
+    <Compile Include="Migrations\20190217171050_Trying to fix id.designer.cs">
+      <DependentUpon>20190217171050_Trying to fix id.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LibraryContextModelSnapshot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

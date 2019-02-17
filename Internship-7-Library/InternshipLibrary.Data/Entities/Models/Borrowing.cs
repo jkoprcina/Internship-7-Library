@@ -8,7 +8,7 @@ namespace InternshipLibrary.Data.Entities.Models
 {
     public class Borrowing
     {
-        public int BorrowingId { get; set; }
+        public int Id { get; set; }
         public int BookId { get; set; }
         public int StudentId { get; set; }
         public DateTime DateOfBorrowing { get; set; }

@@ -48,9 +48,15 @@ namespace Internship_7_Library.Forms.AddForms
             if (FirstNameTxt.Text != "" && LastNameTxt.Text != ""
                 && ClassLbx.SelectedIndex > -1 && GenderLbx.SelectedIndex > -1)
             {
-                _studentRepository.Create(new Student(FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), 
-                    LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), DateOfBirthDtp.Value, 
-                    ClassLbx.SelectedItem as Class, (Gender)GenderLbx.SelectedItem));
+                _studentRepository.Create(new Student
+                {
+                    FirstName = FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
+                    LastName = LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
+                    DateOfBirth = DateOfBirthDtp.Value,
+                    Class = ClassLbx.SelectedItem as Class,
+                    Gender = (Gender) GenderLbx.SelectedItem
+
+                });
             }
             else
             {

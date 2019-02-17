@@ -21,7 +21,7 @@ namespace InternshipLibrary.Domain.Repositories
 
         public void Create(Student student)
         {
-            _context.Attach(student.Class);
+            _context.Classes.Attach(student.Class);
             _context.Students.Add(student);
             _context.SaveChanges();
         }

@@ -14,9 +14,9 @@ namespace InternshipLibrary.Domain.Repositories
 
         public void Create(Book book)
         {
-            _context.Attach(book.Publisher);
-            _context.Attach(book.Author);
-            _context.Add(book);
+            _context.Publishers.Attach(book.Publisher);
+            _context.Authors.Attach(book.Author);
+            _context.Books.Add(book);
             _context.SaveChanges();
         }
 

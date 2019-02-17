@@ -49,31 +49,34 @@ namespace Internship_7_Library.Forms
             AddRemoveCopiesTxt.Text = "";
         }
 
-        private void IsBookSelected()
+        private bool IsBookSelected()
         {
             if (BooksLbx.SelectedIndex < 0)
             {
                 MessageBox.Show("Please choose a book");
-                return;
+                return false;
             }
+            return true;
         }
 
-        private void IsStudentSelected()
+        private bool IsStudentSelected()
         {
             if (StudentLbx.SelectedIndex < 0)
             {
                 MessageBox.Show("Please choose a student");
-                return;
+                return false;
             }
+            return true;
         }
 
-        private void IsBookAndStudentSelected()
+        private bool IsBookAndStudentSelected()
         {
             if (BooksLbx.SelectedIndex < 0 || StudentLbx.SelectedIndex < 0)
             {
                 MessageBox.Show("Please choose a student and a book");
-                return;
+                return false;
             }
+            return true;
         }
 
         //Create, Update, Delete buttons for Books
@@ -87,12 +90,12 @@ namespace Internship_7_Library.Forms
         //Remove book button
         private void RemoveBookBtn_Click(object sender, EventArgs e)
         {
-            IsBookSelected();
+            if(!IsBookSelected())
+                return;
             var message = "Are you sure you wish to remove this book?";
             var caption = "Asking approval";
             var buttons = MessageBoxButtons.YesNo;
             DialogResult result;
-
             result = MessageBox.Show(message, caption, buttons);
             if (result == DialogResult.No)
                 return;
@@ -102,7 +105,8 @@ namespace Internship_7_Library.Forms
         //Update book button
         private void EditBookBtn_Click(object sender, EventArgs e)
         {
-            IsBookSelected();
+            if (!IsBookSelected())
+                return;
             var editBook = new EditBookForm(BooksLbx.SelectedItem as Book);
             editBook.ShowDialog();
             ClearAndFillForm();
@@ -110,7 +114,8 @@ namespace Internship_7_Library.Forms
 
         private void AddCopiesBtn_Click(object sender, EventArgs e)
         {
-            IsBookSelected();
+            if (!IsBookSelected())
+                return;
             try
             {
                 (BooksLbx.SelectedItem as Book).AddCopies(int.Parse(AddRemoveCopiesTxt.Text));
@@ -125,7 +130,8 @@ namespace Internship_7_Library.Forms
 
         private void RemoveCopiesBtn_Click(object sender, EventArgs e)
         {
-            IsBookSelected();
+            if (!IsBookSelected())
+                return;
             try
             {
                 MessageBox.Show((BooksLbx.SelectedItem as Book).RemoveCopies(int.Parse(AddRemoveCopiesTxt.Text)));
@@ -149,7 +155,8 @@ namespace Internship_7_Library.Forms
         //Delete student button
         private void RemoveStudentBtn_Click(object sender, EventArgs e)
         {
-            IsStudentSelected();
+            if (!IsStudentSelected())
+                return;
             var message = "Are you sure you wish to remove this student?";
             var caption = "Asking approval";
             var buttons = MessageBoxButtons.YesNo;
@@ -164,7 +171,8 @@ namespace Internship_7_Library.Forms
         //Update student button
         private void EditStudentBtn_Click(object sender, EventArgs e)
         {
-            IsStudentSelected();
+            if (!IsStudentSelected())
+                return;
             var editStudent = new EditStudentForm(StudentLbx.SelectedItem as Student);
             editStudent.ShowDialog();
             ClearAndFillForm();
@@ -194,7 +202,8 @@ namespace Internship_7_Library.Forms
         {
             try
             {
-                IsStudentSelected();
+                if (!IsStudentSelected())
+                    return;
                 var student = StudentLbx.SelectedItem as Student;
                 if (student.Loan >= double.Parse(LoanReturnTxt.Text))
                 {
@@ -222,7 +231,8 @@ namespace Internship_7_Library.Forms
         //Borrow book button
         private void BorrowBtn_Click(object sender, EventArgs e)
         {
-            IsBookAndStudentSelected();
+            if (!IsBookAndStudentSelected())
+                return;
             if (_borrowingRepository.Read().FirstOrDefault(borr =>
                     borr.Student == StudentLbx.SelectedItem as Student
                     && borr.IsReturned == false) != null)
@@ -259,7 +269,8 @@ namespace Internship_7_Library.Forms
         //Return book button
         private void ReturnBtn_Click(object sender, EventArgs e)
         {
-            IsStudentSelected();
+            if (!IsStudentSelected())
+                return;
             _student = StudentLbx.SelectedItem as Student;
             var borrowing = _borrowingRepository.Read()
                 .FirstOrDefault(borr => borr.Student == _student && borr.IsReturned == false);

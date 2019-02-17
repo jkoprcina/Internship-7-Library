@@ -20,8 +20,8 @@ namespace InternshipLibrary.Domain.Repositories
 
         public void Create(Borrowing borrowing)
         {
-            _context.Attach(borrowing.Student);
-            _context.Attach(borrowing.Book);
+            _context.Students.Attach(borrowing.Student);
+            _context.Books.Attach(borrowing.Book);
             _context.Borrowings.Add(borrowing);
             _context.SaveChanges();
         }

@@ -27,6 +27,9 @@ namespace InternshipLibrary.Data.Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Borrowing>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Borrowing>()
                 .HasOne(br => br.Book)
                 .WithMany(b => b.Borrowings)
                 .HasForeignKey(br => br.BookId);
