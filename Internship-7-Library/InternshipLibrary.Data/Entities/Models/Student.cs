@@ -16,6 +16,7 @@ namespace InternshipLibrary.Data.Entities.Models
         public string LastName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public Gender Gender { get; set; }
+        public double Loan { get; set; }
 
         public Class Class { get; set; }
         public ICollection<Borrowing> Borrowings { get; set; }
@@ -30,6 +31,7 @@ namespace InternshipLibrary.Data.Entities.Models
             DateOfBirth = dateOfBirth;
             Class = schoolClass;
             Gender = gender;
+            Loan = 0;
         }
 
         public override string ToString()

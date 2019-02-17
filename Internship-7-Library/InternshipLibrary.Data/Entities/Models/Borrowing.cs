@@ -13,6 +13,7 @@ namespace InternshipLibrary.Data.Entities.Models
         public int StudentId { get; set; }
         public DateTime DateOfBorrowing { get; set; }
         public DateTime DateOfReturn { get; set; }
+        public bool IsReturned { get; set; }
 
         public Book Book { get; set; }
         public Student Student { get; set; }
@@ -21,12 +22,13 @@ namespace InternshipLibrary.Data.Entities.Models
         {
         }
 
-        public Borrowing(DateTime dateOfBorrowing, DateTime dateOfReturn, Book book, Student student)
+        public Borrowing(DateTime dateOfBorrowing, DateTime dateOfReturn, Book book, Student student,bool isReturned)
         {
             DateOfBorrowing = dateOfBorrowing;
             DateOfReturn = dateOfReturn;
             Book = book;
             Student = student;
+            IsReturned = isReturned;
         }
     }
 }

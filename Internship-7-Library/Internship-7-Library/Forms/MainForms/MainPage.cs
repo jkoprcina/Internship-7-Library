@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using InternshipLibrary.Data.Entities.Models;
 using InternshipLibrary.Domain.Repositories;
+using InternshipLibrary.Extensions.Extensions;
 using Internship_7_Library.Forms.AddForms;
 using Internship_7_Library.Forms.EditForms;
 using Internship_7_Library.Forms.MainForms;
@@ -43,6 +44,36 @@ namespace Internship_7_Library.Forms
                 StudentLbx.Items.Add(student);
             _book = null;
             _student = null;
+            NumberOfDaysTxt.Text = "";
+            LoanReturnTxt.Text = "";
+            AddRemoveCopiesTxt.Text = "";
+        }
+
+        private void IsBookSelected()
+        {
+            if (BooksLbx.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please choose a book");
+                return;
+            }
+        }
+
+        private void IsStudentSelected()
+        {
+            if (StudentLbx.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please choose a student");
+                return;
+            }
+        }
+
+        private void IsBookAndStudentSelected()
+        {
+            if (BooksLbx.SelectedIndex < 0 || StudentLbx.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please choose a student and a book");
+                return;
+            }
         }
 
         //Create, Update, Delete buttons for Books
@@ -56,41 +87,55 @@ namespace Internship_7_Library.Forms
         //Remove book button
         private void RemoveBookBtn_Click(object sender, EventArgs e)
         {
-            if (BooksLbx.SelectedIndex > -1)
-            {
-                const string message = "Are you sure you wish to remove this book?";
-                const string caption = "Asking approval";
-                var buttons = MessageBoxButtons.YesNo;
-                DialogResult result;
+            IsBookSelected();
+            var message = "Are you sure you wish to remove this book?";
+            var caption = "Asking approval";
+            var buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
 
-                result = MessageBox.Show(message, caption, buttons);
-                if (result == DialogResult.No)
-                {
-                    return;
-                }
-                _bookRepository.Delete(BooksLbx.SelectedItem as Book);
-                ClearAndFillForm();
-            }
-            else
-            {
-                MessageBox.Show("Please select the book you wish to remove");
+            result = MessageBox.Show(message, caption, buttons);
+            if (result == DialogResult.No)
                 return;
-            }
+            _bookRepository.Delete(BooksLbx.SelectedItem as Book);
+            ClearAndFillForm();
         }
         //Update book button
         private void EditBookBtn_Click(object sender, EventArgs e)
         {
-            if (BooksLbx.SelectedIndex > -1)
+            IsBookSelected();
+            var editBook = new EditBookForm(BooksLbx.SelectedItem as Book);
+            editBook.ShowDialog();
+            ClearAndFillForm();
+        }
+
+        private void AddCopiesBtn_Click(object sender, EventArgs e)
+        {
+            IsBookSelected();
+            try
             {
-                var editBook = new EditBookForm(BooksLbx.SelectedItem as Book);
-                editBook.ShowDialog();
-                ClearAndFillForm();
+                (BooksLbx.SelectedItem as Book).AddCopies(int.Parse(AddRemoveCopiesTxt.Text));
             }
-            else
+            catch
             {
-                MessageBox.Show("Please select the book you wish to edit");
+                MessageBox.Show("Wrong input");
                 return;
             }
+            ClearAndFillForm();
+        }
+
+        private void RemoveCopiesBtn_Click(object sender, EventArgs e)
+        {
+            IsBookSelected();
+            try
+            {
+                MessageBox.Show((BooksLbx.SelectedItem as Book).RemoveCopies(int.Parse(AddRemoveCopiesTxt.Text)));
+            }
+            catch
+            {
+                MessageBox.Show("Wrong input");
+                return;
+            }
+            ClearAndFillForm();
         }
 
         //Create, Update, Delete buttons for Students
@@ -104,41 +149,25 @@ namespace Internship_7_Library.Forms
         //Delete student button
         private void RemoveStudentBtn_Click(object sender, EventArgs e)
         {
-            if(StudentLbx.SelectedIndex > -1)
-            {
-                const string message = "Are you sure you wish to remove this student?";
-                const string caption = "Asking approval";
-                var buttons = MessageBoxButtons.YesNo;
-                DialogResult result;
+            IsStudentSelected();
+            var message = "Are you sure you wish to remove this student?";
+            var caption = "Asking approval";
+            var buttons = MessageBoxButtons.YesNo;
+            DialogResult result;
 
-                result = MessageBox.Show(message, caption, buttons);
-                if (result == DialogResult.No)
-                {
-                    return;
-                }
-                _studentRepository.Delete(StudentLbx.SelectedItem as Student);
-                ClearAndFillForm();
-            }
-            else
-            {
-                MessageBox.Show("Please select the student you wish to remove");
+            result = MessageBox.Show(message, caption, buttons);
+            if (result == DialogResult.No)
                 return;
-            }
+            _studentRepository.Delete(StudentLbx.SelectedItem as Student);
+            ClearAndFillForm();
         }
         //Update student button
         private void EditStudentBtn_Click(object sender, EventArgs e)
         {
-            if (StudentLbx.SelectedIndex > -1)
-            {
-                var editStudent = new EditStudentForm(StudentLbx.SelectedItem as Student);
-                editStudent.ShowDialog();
-                ClearAndFillForm();
-            }
-            else
-            {
-                MessageBox.Show("Please select the student you wish to edit");
-                return;
-            }
+            IsStudentSelected();
+            var editStudent = new EditStudentForm(StudentLbx.SelectedItem as Student);
+            editStudent.ShowDialog();
+            ClearAndFillForm();
         }
 
         //Buttons to open Authors, Publishers and Classes
@@ -161,53 +190,89 @@ namespace Internship_7_Library.Forms
             libraryClass.ShowDialog();
         }
 
+        private void LoanReturnBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                IsStudentSelected();
+                var student = StudentLbx.SelectedItem as Student;
+                if (student.Loan >= double.Parse(LoanReturnTxt.Text))
+                {
+                    student.Loan -= double.Parse(LoanReturnTxt.Text);
+                    MessageBox.Show($"The student now has {student.Loan} left to return");
+                    ClearAndFillForm();
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show($"Return {double.Parse(LoanReturnTxt.Text) - student.Loan} to the student");
+                    student.Loan = 0;
+                    ClearAndFillForm();
+                    return;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Wrong input");
+                return;
+            }
+        }
+
         //Borrow, return and Exit Buttons
         //Borrow book button
         private void BorrowBtn_Click(object sender, EventArgs e)
         {
-            if (BooksLbx.SelectedIndex > -1 && StudentLbx.SelectedIndex > -1)
+            IsBookAndStudentSelected();
+            if (_borrowingRepository.Read().FirstOrDefault(borr =>
+                    borr.Student == StudentLbx.SelectedItem as Student
+                    && borr.IsReturned == false) != null)
             {
-                if ((StudentLbx.SelectedItem as Student).Borrowings != null)
-                {
-                    MessageBox.Show("The student has a book already, he can take a new one after he returns that one");
-                    return;
-                }
-                _student = StudentLbx.SelectedItem as Student;
-                _book = BooksLbx.SelectedItem as Book;
-                _borrowingRepository.Create(new Borrowing(DateTime.Now, (DateTime.Now.AddDays(30)), _book, _student));
-                _book.NumberOfBooksAvailable -= 1;
-                _book.NumberOfBooksBorrowed += 1;
-                ClearAndFillForm();
-            }
-            else
-            {
-                MessageBox.Show("Please select a book and student");
+                MessageBox.Show(
+                    "The student has a book already, he can take a new one after he returns that one");
                 return;
             }
+
+            _student = StudentLbx.SelectedItem as Student;
+            _book = BooksLbx.SelectedItem as Book;
+            if (NumberOfDaysTxt.Text == "")
+                _borrowingRepository.Create(new Borrowing(DateTime.Now, (DateTime.Now.AddDays(30)), _book,
+                    _student, false));
+            else
+            {
+                try
+                {
+                    var CatchingException = int.Parse(NumberOfDaysTxt.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Wrong input");
+                    return;
+                }
+                _borrowingRepository.Create(new Borrowing(DateTime.Now, (DateTime.Now.AddDays(int.Parse(NumberOfDaysTxt.Text))),
+                    _book, _student, false));
+            }
+            _book.NumberOfBooksAvailable -= 1;
+            _book.NumberOfBooksBorrowed += 1;
+            ClearAndFillForm();
+            
         }
         //Return book button
         private void ReturnBtn_Click(object sender, EventArgs e)
         {
-            if (StudentLbx.SelectedIndex > -1)
+            IsStudentSelected();
+            _student = StudentLbx.SelectedItem as Student;
+            var borrowing = _borrowingRepository.Read()
+                .FirstOrDefault(borr => borr.Student == _student && borr.IsReturned == false);
+            if (borrowing == null)
             {
-                if ((StudentLbx.SelectedItem as Student).Borrowings == null)
-                {
-                    MessageBox.Show("The student doesn't have a book to return");
-                    return;
-                }
-
-                _student = StudentLbx.SelectedItem as Student;
-                var borrowing = _borrowingRepository.Read().FirstOrDefault(borr => borr.Student == _student);
-                borrowing.Book.NumberOfBooksAvailable += 1;
-                borrowing.Book.NumberOfBooksBorrowed -= 1;
-                _borrowingRepository.Delete(borrowing);
-                ClearAndFillForm();
-            }
-            else
-            {
-                MessageBox.Show("Please select a book and student");
+                MessageBox.Show("The student doesn't have a book to return");
                 return;
             }
+            borrowing.Book.NumberOfBooksAvailable += 1;
+            borrowing.Book.NumberOfBooksBorrowed -= 1;
+            borrowing.IsReturned = true;
+            _student.Loan += MoneyFunctions.CountLoan(borrowing.DateOfReturn);
+            ClearAndFillForm();
         }
         //Exit app method 
         private void Exit_Click(object sender, EventArgs e) => Close();

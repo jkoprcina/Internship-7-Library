@@ -40,5 +40,16 @@ namespace InternshipLibrary.Data.Entities.Models
         {
             return $"{Name} Author:{Author.FirstName} Publisher:{Publisher.Name} Number:{NumberOfBooksAvailable}";
         }
+
+        public void AddCopies(int numberToAdd) => NumberOfBooksAvailable += numberToAdd;
+
+        public string RemoveCopies(int numberToRemove)
+        {
+            if (NumberOfBooksAvailable - numberToRemove < 0)
+                return "You can not remove that many books because there are less available";
+            else
+                NumberOfBooksAvailable -= numberToRemove;
+            return "Succesfully removed";
+        }
     }
 }
