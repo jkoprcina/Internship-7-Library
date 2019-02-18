@@ -47,28 +47,26 @@ namespace Internship_7_Library.Forms.EditForms
             PageNumberTxt.Text = _book.PageNumber.ToString();
         }
 
+        //Updating Book 
         private void EditBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                if (int.Parse(NumberOfBooksTxt.Text) < 1)
+                if (AuthorLbx.SelectedIndex > -1 && PublisherLbx.SelectedIndex > -1 && GenreLbx.SelectedIndex > -1)
                 {
-                    MessageBox.Show("The book must have at least one page and there must be a minimum of one copy");
-                    return;
-                }
-                if (NameTxt.Text != "" && PageNumberTxt.Text != "" && NumberOfBooksTxt.Text != "" && AuthorLbx.SelectedIndex > -1
-                    && PublisherLbx.SelectedIndex > -1 && GenreLbx.SelectedIndex > -1)
-                {
-                    _bookRepository.Update(_book,new Book(NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), int.Parse(PageNumberTxt.Text),
-                        int.Parse(NumberOfBooksTxt.Text), AuthorLbx.SelectedItem as Author, 
-                        PublisherLbx.SelectedItem as Publisher, (Genre)GenreLbx.SelectedItem));
+                    _bookRepository.Update(new Book
+                    {
+                        Name = NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
+                        NumberOfBooksAvailable = int.Parse(NumberOfBooksTxt.Text),
+                        NumberOfBooksBorrowed = 0,
+                        Author = AuthorLbx.SelectedItem as Author,
+                        Publisher = PublisherLbx.SelectedItem as Publisher,
+                        Genre = (Genre) GenreLbx.SelectedItem
+                    }, _book);
                     Close();
                 }
                 else
-                {
                     MessageBox.Show("All info must be filled/selected");
-                    return;
-                }
             }
             catch
             {
@@ -77,6 +75,7 @@ namespace Internship_7_Library.Forms.EditForms
             }
         }
 
+        //Exiting form
         private void ExitBtn_Click(object sender, EventArgs e) => Close();
     }
 }

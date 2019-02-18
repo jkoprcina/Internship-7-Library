@@ -49,6 +49,8 @@ namespace Internship_7_Library.Forms
             AddRemoveCopiesTxt.Text = "";
         }
 
+        //A few methods to check if the needed info is selected
+        //Checking is book selected
         private bool IsBookSelected()
         {
             if (BooksLbx.SelectedIndex < 0)
@@ -59,6 +61,7 @@ namespace Internship_7_Library.Forms
             return true;
         }
 
+        //Checking is student selected
         private bool IsStudentSelected()
         {
             if (StudentLbx.SelectedIndex < 0)
@@ -69,6 +72,7 @@ namespace Internship_7_Library.Forms
             return true;
         }
 
+        //Checking is book and student selected
         private bool IsBookAndStudentSelected()
         {
             if (BooksLbx.SelectedIndex < 0 || StudentLbx.SelectedIndex < 0)
@@ -87,6 +91,7 @@ namespace Internship_7_Library.Forms
             addNewBook.ShowDialog();
             ClearAndFillForm();
         }
+
         //Remove book button
         private void RemoveBookBtn_Click(object sender, EventArgs e)
         {
@@ -99,9 +104,10 @@ namespace Internship_7_Library.Forms
             result = MessageBox.Show(message, caption, buttons);
             if (result == DialogResult.No)
                 return;
-            _bookRepository.Delete(BooksLbx.SelectedItem as Book);
+            MessageBox.Show(_bookRepository.Delete(BooksLbx.SelectedItem as Book));
             ClearAndFillForm();
         }
+
         //Update book button
         private void EditBookBtn_Click(object sender, EventArgs e)
         {
@@ -112,6 +118,7 @@ namespace Internship_7_Library.Forms
             ClearAndFillForm();
         }
 
+        //Adds new copies of an old book
         private void AddCopiesBtn_Click(object sender, EventArgs e)
         {
             if (!IsBookSelected())
@@ -128,6 +135,7 @@ namespace Internship_7_Library.Forms
             ClearAndFillForm();
         }
 
+        //Removes copies of an old book
         private void RemoveCopiesBtn_Click(object sender, EventArgs e)
         {
             if (!IsBookSelected())
@@ -152,6 +160,7 @@ namespace Internship_7_Library.Forms
             addNewStudent.ShowDialog();
             ClearAndFillForm();
         }
+
         //Delete student button
         private void RemoveStudentBtn_Click(object sender, EventArgs e)
         {
@@ -168,6 +177,7 @@ namespace Internship_7_Library.Forms
             _studentRepository.Delete(StudentLbx.SelectedItem as Student);
             ClearAndFillForm();
         }
+
         //Update student button
         private void EditStudentBtn_Click(object sender, EventArgs e)
         {
@@ -185,12 +195,14 @@ namespace Internship_7_Library.Forms
             var author = new AuthorForm();
             author.ShowDialog();
         }
+
         //Publishers button
         private void PublisherBtn_Click(object sender, EventArgs e)
         {
             var publisher = new PublisherForm();
             publisher.ShowDialog();
         }
+
         //Classes button
         private void ClassBtn_Click(object sender, EventArgs e)
         {
@@ -233,20 +245,11 @@ namespace Internship_7_Library.Forms
         {
             if (!IsBookAndStudentSelected())
                 return;
-            if (_borrowingRepository.Read().FirstOrDefault(borr =>
-                    borr.Student == StudentLbx.SelectedItem as Student
-                    && borr.IsReturned == false) != null)
-            {
-                MessageBox.Show(
-                    "The student has a book already, he can take a new one after he returns that one");
-                return;
-            }
-
             _student = StudentLbx.SelectedItem as Student;
             _book = BooksLbx.SelectedItem as Book;
             if (NumberOfDaysTxt.Text == "")
-                _borrowingRepository.Create(new Borrowing(DateTime.Now, (DateTime.Now.AddDays(30)), _book,
-                    _student, false));
+                MessageBox.Show(_borrowingRepository.Create(new Borrowing(DateTime.Now, (DateTime.Now.AddDays(30)), 
+                    BooksLbx.SelectedItem as Book,_student, false)));
             else
             {
                 try
@@ -258,13 +261,10 @@ namespace Internship_7_Library.Forms
                     MessageBox.Show("Wrong input");
                     return;
                 }
-                _borrowingRepository.Create(new Borrowing(DateTime.Now, (DateTime.Now.AddDays(int.Parse(NumberOfDaysTxt.Text))),
-                    _book, _student, false));
+                MessageBox.Show(_borrowingRepository.Create(new Borrowing(DateTime.Now, DateTime.Now.AddDays(int.Parse(NumberOfDaysTxt.Text))
+                    ,_book, _student, false)));
             }
-            _book.NumberOfBooksAvailable -= 1;
-            _book.NumberOfBooksBorrowed += 1;
             ClearAndFillForm();
-            
         }
         //Return book button
         private void ReturnBtn_Click(object sender, EventArgs e)
@@ -272,19 +272,17 @@ namespace Internship_7_Library.Forms
             if (!IsStudentSelected())
                 return;
             _student = StudentLbx.SelectedItem as Student;
-            var borrowing = _borrowingRepository.Read()
-                .FirstOrDefault(borr => borr.Student == _student && borr.IsReturned == false);
+            var borrowing = _borrowingRepository.Read(_student.Id);
             if (borrowing == null)
             {
                 MessageBox.Show("The student doesn't have a book to return");
                 return;
             }
-            borrowing.Book.NumberOfBooksAvailable += 1;
-            borrowing.Book.NumberOfBooksBorrowed -= 1;
-            borrowing.IsReturned = true;
             _student.Loan += MoneyFunctions.CountLoan(borrowing.DateOfReturn);
+            MessageBox.Show(_borrowingRepository.Delete(borrowing));
             ClearAndFillForm();
         }
+
         //Exit app method 
         private void Exit_Click(object sender, EventArgs e) => Close();
     }

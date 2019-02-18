@@ -14,10 +14,7 @@ namespace InternshipLibrary.Domain.Repositories
     {
         private readonly LibraryContext _context;
 
-        public StudentRepository()
-        {
-            _context = new LibraryContext();
-        }
+        public StudentRepository() => _context = new LibraryContext();
 
         public void Create(Student student)
         {
@@ -26,10 +23,7 @@ namespace InternshipLibrary.Domain.Repositories
             _context.SaveChanges();
         }
 
-        public Student Read(int id)
-        {
-            return _context.Students.Find(id);
-        }
+        public Student Read(int id) => _context.Students.Find(id);
 
         public List<Student> Read()
         {

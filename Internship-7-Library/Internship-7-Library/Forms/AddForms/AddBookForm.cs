@@ -41,24 +41,13 @@ namespace Internship_7_Library.Forms.AddForms
             foreach (var genre in Enum.GetValues(typeof(Genre)).Cast<Genre>())
                 GenreLbx.Items.Add(genre);
         }
-
-        //Exiting the form
-        private void ExitBtn_Click(object sender, EventArgs e) => Close();
-
+        
         //Creating book
-        //Exits if the name is already in use, and exits if it's successfully added
-        //A author and publisher must be chosen
         private void AddBtn_Click(object sender, EventArgs e)
         {
             try
             {
-                if(int.Parse(NumberOfBooksTxt.Text) < 1)
-                {
-                    MessageBox.Show("The book must have at least one page and there must be a minimum of one copy");
-                    return;
-                }
-                if (NameTxt.Text != "" && PageNumberTxt.Text != "" && NumberOfBooksTxt.Text != "" && AuthorLbx.SelectedIndex > -1
-                    && PublisherLbx.SelectedIndex > -1 && GenreLbx.SelectedIndex > -1)
+                if (AuthorLbx.SelectedIndex > -1 && PublisherLbx.SelectedIndex > -1 && GenreLbx.SelectedIndex > -1)
                 {
                     _bookRepository.Create(new Book
                     {
@@ -72,16 +61,16 @@ namespace Internship_7_Library.Forms.AddForms
                     Close();
                 }
                 else
-                {
-                    MessageBox.Show("All info must be filled/selected");
-                    return;
-                }
+                    MessageBox.Show("You must select one of each list of options");
             }
-            catch(Exception ex)
+            catch
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("wrong input");
                 return;
             }
         }
+
+        //Exiting the form
+        private void ExitBtn_Click(object sender, EventArgs e) => Close();
     }
 }

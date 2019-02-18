@@ -21,8 +21,6 @@ namespace Internship_7_Library
             InitializeComponent();
             ClearAndFillForm();
         }
-        //Exiting the form
-        private void Exit_Click(object sender, EventArgs e) => Close();
 
         //Clearing the lists to refresh them and filling them at the start
         private void ClearAndFillForm()
@@ -40,75 +38,51 @@ namespace Internship_7_Library
         {
             try
             {
-                if (YearTxt.Text == "" || LetterTxt.Text == "")
+                MessageBox.Show(_classRepository.Create(new Class
                 {
-                    MessageBox.Show("You must enter a first and last name");
-                    return;
-                }
-                else
-                {
-                    foreach (var schoolClass in _classRepository.Read())
-                    {
-                        if (int.Parse(YearTxt.Text) == schoolClass.Number &&
-                            char.Parse(LetterTxt.Text) == schoolClass.Letter)
-                        {
-                            MessageBox.Show("That class already exists");
-                            return;
-                        }
-                    }
-                }
-                _classRepository.Create(new Class(char.Parse(LetterTxt.Text), int.Parse(YearTxt.Text)));
+                    Letter = char.Parse(LetterTxt.Text),
+                    Number = int.Parse(YearTxt.Text)
+                }));
                 ClearAndFillForm();
             }
             catch 
             {
                 MessageBox.Show("Wrong input");
-                return;
             }
         }
         //Delete class button
         private void RemoveClassBtn_Click(object sender, EventArgs e)
         {
             if (ClassLbx.SelectedIndex > -1)
-            {
-                _classRepository.Delete(ClassLbx.SelectedItem as Class);
-            }
+                MessageBox.Show(_classRepository.Delete(ClassLbx.SelectedItem as Class));
             else
-            {
                 MessageBox.Show("Please first choose the author you wish to remove");
-            }
             ClearAndFillForm();
         }
         //Update class button
         private void EditClassBtn_Click(object sender, EventArgs e)
         {
-            try
+            if (ClassLbx.SelectedIndex > -1)
             {
-                if (YearTxt.Text == "" || LetterTxt.Text == "")
+                try
                 {
-                    MessageBox.Show("You must enter a first and last name");
-                    return;
-                }
-                else
-                {
-                    foreach (var schoolClass in _classRepository.Read())
+                    MessageBox.Show(_classRepository.Update(new Class
                     {
-                        if (int.Parse(YearTxt.Text) == schoolClass.Number &&
-                            char.Parse(LetterTxt.Text) == schoolClass.Letter)
-                        {
-                            MessageBox.Show("That class already exists");
-                            return;
-                        }
-                    }
+                        Letter = char.Parse(LetterTxt.Text),
+                        Number = int.Parse(YearTxt.Text)
+                    }, ClassLbx.SelectedItem as Class));
                 }
-                _classRepository.Update(new Class(char.Parse(LetterTxt.Text), int.Parse(YearTxt.Text)), ClassLbx.SelectedItem as Class);
-                ClearAndFillForm();
+                catch
+                {
+                    MessageBox.Show("Wrong input");
+                }
             }
-            catch
-            {
-                MessageBox.Show("Wrong input");
-                return;
-            }
+            else
+                MessageBox.Show("Please first choose the author you wish to remove");
+            ClearAndFillForm();
         }
+
+        //Exiting the form
+        private void Exit_Click(object sender, EventArgs e) => Close();
     }
 }

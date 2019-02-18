@@ -12,23 +12,26 @@ namespace InternshipLibrary.Domain.Repositories
 
         public BookRepository() => _context = new LibraryContext();
 
-        public void Create(Book book)
+        public string Create(Book book)
         {
+            if (book.CheckIfUnacceptableAtributes(book))
+                return "You must input all values";
             _context.Publishers.Attach(book.Publisher);
             _context.Authors.Attach(book.Author);
             _context.Books.Add(book);
             _context.SaveChanges();
+            return "Successfully added";
         }
 
         public Book Read(int id) => _context.Books.Find(id);
 
-        public List<Book> Read()
-        {
-            return _context.Books.Include(book => book.Publisher).Include(aut => aut.Author).ToList();
-        }
+        public List<Book> Read() => _context.Books.Include(book => book.Publisher).Include(aut => aut.Author).ToList();
 
-        public void Update(Book oldBook, Book newBook)
+        public string Update(Book newBook, Book oldBook)
         {
+            if (newBook.CheckIfUnacceptableAtributes(newBook))
+                return "You must input all values";
+
             oldBook.Name = newBook.Name;
             oldBook.Publisher = newBook.Publisher;
             oldBook.Author = newBook.Author;
@@ -36,12 +39,16 @@ namespace InternshipLibrary.Domain.Repositories
             oldBook.PageNumber = newBook.PageNumber;
             oldBook.Genre = newBook.Genre;
             _context.SaveChanges();
+            return "Successfully updated";
         }
 
-        public void Delete(Book book)
+        public string Delete(Book book)
         {
+            if (_context.Borrowings.Any(x => x.Book == book))
+                return "You must first return all of the copies of the existing book";
             _context.Books.Remove(book);
             _context.SaveChanges();
+            return "Successfully updated";
         }
     }
 }

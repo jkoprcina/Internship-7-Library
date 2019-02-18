@@ -33,69 +33,44 @@ namespace Internship_7_Library
                 PublisherLbx.Items.Add(publisher);
             NameTxt.Text = "";
         }
-
-        //Exiting the form
-        private void Exit_Click(object sender, EventArgs e) => Close();
-
+        
         //Create, Update, Delete publisher
         //Create publisher button
         private void AddNewPublisher_Click(object sender, EventArgs e)
         {
-            if (NameTxt.Text == "")
+            MessageBox.Show(_publisherRepository.Create(new Publisher
             {
-                MessageBox.Show("You must enter a first and last name");
-                return;
-            }
-            else
-            {
-                foreach (var publisher in _publisherRepository.Read())
-                {
-                    if (NameTxt.Text == publisher.Name)
-                    {
-                        MessageBox.Show("That author already exists");
-                        return;
-                    }
-                }
-            }
-            _publisherRepository.Create(new Publisher(NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords()));
+                Name = NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords()
+            }));
             ClearAndFillForm();
         }
+
         //Delete publisher button
         private void RemovePublisherBtn_Click(object sender, EventArgs e)
         {
             if (PublisherLbx.SelectedIndex > -1)
-            {
-                _publisherRepository.Delete(PublisherLbx.SelectedItem as Publisher);
-                ClearAndFillForm();
-            }
+                MessageBox.Show(_publisherRepository.Delete(PublisherLbx.SelectedItem as Publisher));
             else
-            {
                 MessageBox.Show("Please first choose the author you wish to remove");
-            }
             ClearAndFillForm();
         }
 
         //Update publisher button
         private void EditPublisherBtn_Click(object sender, EventArgs e)
         {
-            if (NameTxt.Text == "")
+            if (PublisherLbx.SelectedIndex > -1)
             {
-                MessageBox.Show("You must enter a first and last name");
-                return;
+                MessageBox.Show(_publisherRepository.Update(new Publisher
+                {
+                    Name = NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords()
+                }, PublisherLbx.SelectedItem as Publisher));
             }
             else
-            {
-                foreach (var publisher in _publisherRepository.Read())
-                {
-                    if (NameTxt.Text == publisher.Name)
-                    {
-                        MessageBox.Show("That author already exists");
-                        return;
-                    }
-                }
-            }
-            _publisherRepository.Update(new Publisher(NameTxt.Text), PublisherLbx.SelectedItem as Publisher);
+                MessageBox.Show("Please choose the publisher you wish to edit");
             ClearAndFillForm();
         }
+
+        //Exiting the form
+        private void Exit_Click(object sender, EventArgs e) => Close();
     }
 }

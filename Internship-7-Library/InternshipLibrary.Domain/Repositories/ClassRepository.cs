@@ -12,41 +12,44 @@ namespace InternshipLibrary.Domain.Repositories
     {
         private readonly LibraryContext _context;
 
-        public ClassRepository()
-        {
-            _context = new LibraryContext();
-        }
+        public ClassRepository() => _context = new LibraryContext();
 
-        public void Create(Class schoolClass)
+        public string Create(Class schoolClass)
         {
+            if (schoolClass.Letter.ToString() == "" || schoolClass.Number.ToString() == "")
+                return "You must enter a class letter and year";
+            if (Read().Any(x => x.Letter == schoolClass.Letter && x.Number == schoolClass.Number))
+                return "That class already exists";
             schoolClass.Letter = char.ToUpper(schoolClass.Letter);
             _context.Classes.Add(schoolClass);
             _context.SaveChanges();
+            return "Successfully added";
         }
 
-        public Class Read(int id)
-        {
-            return _context.Classes.Find(id);
-        }
+        public Class Read(int id) => _context.Classes.Find(id);
 
-        public List<Class> Read()
-        {
-            return _context.Classes.ToList();
-        }
+        public List<Class> Read() => _context.Classes.ToList();
 
-        public void Update(Class newSchoolClass, Class oldSchoolClass)
+        public string Update(Class newSchoolClass, Class oldSchoolClass)
         {
-            newSchoolClass.Id = oldSchoolClass.Id;
-            _context.Classes.Remove(oldSchoolClass);
-            newSchoolClass.Letter = char.ToUpper(newSchoolClass.Letter);
-            _context.Classes.Add(newSchoolClass);
+            if (newSchoolClass.Letter.ToString() == "" || newSchoolClass.Number.ToString() == "")
+                return "You must enter a class letter and year";
+            if (Read().Any(x => x.Letter == newSchoolClass.Letter && x.Number == newSchoolClass.Number))
+                return "You made no changes";
+
+            oldSchoolClass.Letter = char.ToUpper(newSchoolClass.Letter);
+            oldSchoolClass.Number = newSchoolClass.Number;
             _context.SaveChanges();
+            return "Successfully updated";
         }
 
-        public void Delete(Class schoolClass)
+        public string Delete(Class schoolClass)
         {
+            if (_context.Students.Any(x => x.Class == schoolClass))
+                return "You must first remove all students which are in that class";
             _context.Classes.Remove(schoolClass);
             _context.SaveChanges();
+            return "Successfully removed";
         }
     }
 }

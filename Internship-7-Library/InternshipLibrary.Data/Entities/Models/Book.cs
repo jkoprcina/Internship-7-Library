@@ -24,22 +24,6 @@ namespace InternshipLibrary.Data.Entities.Models
         public Publisher Publisher { get; set; }
         public ICollection<Borrowing> Borrowings { get; set; }
 
-        public Book()
-        {
-        }
-
-        public Book(string name, int pageNumber, int numberOfBooksAvailable, Author author, 
-            Publisher publisher, Genre genre, int numberOfBooksBorrowed = 0)
-        {
-            Name = name;
-            PageNumber = pageNumber;
-            NumberOfBooksAvailable = numberOfBooksAvailable;
-            NumberOfBooksBorrowed = numberOfBooksBorrowed;
-            Author = author;
-            Publisher = publisher;
-            Genre = genre;
-        }
-
         public override string ToString()
         {
             return $"{Name} Author:{Author.FirstName} Publisher:{Publisher.Name} Number:{NumberOfBooksAvailable}";
@@ -54,6 +38,26 @@ namespace InternshipLibrary.Data.Entities.Models
             else
                 NumberOfBooksAvailable -= numberToRemove;
             return "Succesfully removed";
+        }
+
+        public void Borrowing()
+        {
+            NumberOfBooksAvailable -= 1;
+            NumberOfBooksBorrowed += 1;
+        }
+
+        public void Returning()
+        {
+            NumberOfBooksAvailable += 1;
+            NumberOfBooksBorrowed -= 1;
+        }
+
+        public bool CheckIfUnacceptableAtributes(Book book)
+        {
+            if (book.Name == "" || book.NumberOfBooksAvailable.ToString() == "" || book.NumberOfBooksAvailable < 1
+                || book.PageNumber < 1 || book.PageNumber.ToString() == "")
+                return true;
+            return false;
         }
     }
 }

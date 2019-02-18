@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using InternshipLibrary.Data.Entities.Models;
 using InternshipLibrary.Domain.Repositories;
@@ -26,60 +27,45 @@ namespace Internship_7_Library.Forms.MainForms
             LastNameTxt.Text = "";
         }
 
-        //Exiting the form
-        private void Exit_Click(object sender, EventArgs e) => Close();
-
         //Create, Update, Delete Author
         //Create author button
         private void AddAuthorBtn_Click(object sender, EventArgs e)
         {
-            if (FirstNameTxt.Text == "" || LastNameTxt.Text == "")
+            MessageBox.Show(_authorRepository.Create(new Author
             {
-                MessageBox.Show("You must enter a first and last name");
-                return;
-            }
-            foreach (var author in _authorRepository.Read())
-            {
-                if (FirstNameTxt.Text == author.FirstName && LastNameTxt.Text == author.LastName)
-                {
-                    MessageBox.Show("That author already exists");
-                    return;
-                }
-            }
-            _authorRepository.Create(new Author(FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), 
-                LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords()));
+                FirstName = FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
+                LastName = LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords()
+            }));
             ClearAndFillForm();
         }
+
         //Delete author button
         private void RemoveAuthorBtn_Click(object sender, EventArgs e)
         {
             if (AuthorsLbx.SelectedIndex > -1)
-            {
-                _authorRepository.Delete(AuthorsLbx.SelectedItem as Author);
-            }
+                MessageBox.Show(_authorRepository.Delete(AuthorsLbx.SelectedItem as Author));
             else
-            {
                 MessageBox.Show("Please first choose the author you wish to remove");
-            }
             ClearAndFillForm();
         }
+
         //Update author button
         private void EditAuthorBtn_Click(object sender, EventArgs e)
         {
-            if (FirstNameTxt.Text == "" || LastNameTxt.Text == "")
-            {
-                MessageBox.Show("You must enter a first and last name");
-                return;
-            }
             if (AuthorsLbx.SelectedIndex > -1)
             {
-                _authorRepository.Update(new Author(FirstNameTxt.Text, LastNameTxt.Text),AuthorsLbx.SelectedItem as Author);
+                MessageBox.Show(_authorRepository.Update(new Author
+                {
+                    FirstName = FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
+                    LastName = LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords()
+                },AuthorsLbx.SelectedItem as Author));
             }
             else
-            {
                 MessageBox.Show("Please first choose the author you wish to edit");
-            }
             ClearAndFillForm();
         }
+
+        //Exiting the form
+        private void Exit_Click(object sender, EventArgs e) => Close();
     }
 }
