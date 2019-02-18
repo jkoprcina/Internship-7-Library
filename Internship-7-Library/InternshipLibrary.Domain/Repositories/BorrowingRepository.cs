@@ -14,12 +14,9 @@ namespace InternshipLibrary.Domain.Repositories
 {
     public class BorrowingRepository
     {
-        private readonly LibraryContext _context;
+        private LibraryContext _context;
 
-        public BorrowingRepository()
-        {
-            _context = new LibraryContext();
-        }
+        public BorrowingRepository() => _context = new LibraryContext();
 
         public string Create(Borrowing borrowing)
         {
@@ -37,6 +34,7 @@ namespace InternshipLibrary.Domain.Repositories
             borrowing.Book.Borrowing();
             _context.Borrowings.Add(borrowing);
             _context.SaveChanges();
+            _context = new LibraryContext();
             return "Book borrowed";
         }
 
@@ -54,6 +52,7 @@ namespace InternshipLibrary.Domain.Repositories
             borrowing.Book.Returning();
             _context.Borrowings.Remove(borrowing);
             _context.SaveChanges();
+            _context = new LibraryContext();
             return "successful";
         }
     }

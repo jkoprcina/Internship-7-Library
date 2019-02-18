@@ -8,7 +8,7 @@ namespace InternshipLibrary.Domain.Repositories
 {
     public class BookRepository
     {
-        private readonly LibraryContext _context;
+        private LibraryContext _context;
 
         public BookRepository() => _context = new LibraryContext();
 
@@ -20,6 +20,7 @@ namespace InternshipLibrary.Domain.Repositories
             _context.Authors.Attach(book.Author);
             _context.Books.Add(book);
             _context.SaveChanges();
+            _context = new LibraryContext();
             return "Successfully added";
         }
 
@@ -39,6 +40,7 @@ namespace InternshipLibrary.Domain.Repositories
             oldBook.PageNumber = newBook.PageNumber;
             oldBook.Genre = newBook.Genre;
             _context.SaveChanges();
+            _context = new LibraryContext();
             return "Successfully updated";
         }
 
@@ -48,6 +50,7 @@ namespace InternshipLibrary.Domain.Repositories
                 return "You must first return all of the copies of the existing book";
             _context.Books.Remove(book);
             _context.SaveChanges();
+            _context = new LibraryContext();
             return "Successfully updated";
         }
     }

@@ -8,6 +8,7 @@ using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using InternshipLibrary.Data.Entities;
 using InternshipLibrary.Data.Entities.Models;
 using InternshipLibrary.Domain.Repositories;
 using InternshipLibrary.Extensions.Extensions;
@@ -24,6 +25,7 @@ namespace Internship_7_Library.Forms
         private BorrowingRepository _borrowingRepository;
         private Book _book;
         private Student _student;
+        private LibraryContext _context;
         public MainPage()
         {
             _bookRepository = new BookRepository();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using InternshipLibrary.Data.Enums;
@@ -25,8 +26,18 @@ namespace InternshipLibrary.Data.Entities.Models
 
         public override string ToString()
         {
-            var bookToWriteOut = "No book";
-            return $"{FirstName} {LastName} {DateOfBirth.Year}   {Gender} {Class}   {bookToWriteOut} {Loan}";
+            var bookToWriteOut = "";
+            if (Borrowings != null)
+            {
+                if (Borrowings.FirstOrDefault(x => x.Student.FirstName == FirstName) != null)
+                    bookToWriteOut = Borrowings.FirstOrDefault(x => x.Student.FirstName == FirstName).Book.Name;
+            }
+            else
+            {
+                bookToWriteOut = "No book";
+            }
+
+            return $"{FirstName} {LastName} {DateOfBirth.Year}   {Gender} {Class}   {bookToWriteOut} Loan:{Loan}";
         }
 
         public bool CheckIfUnacceptableAtributes(Student student)
