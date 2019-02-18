@@ -36,34 +36,24 @@ namespace Internship_7_Library.Forms.AddForms
         }
 
         //Creating student
-        //Exits if it's successfully added
-        //A class and gender must be chosen, person must be older than 5 years
         private void AddBtn_Click(object sender, EventArgs e)
         {
-            if (DateOfBirthDtp.Value.Year < 6)
+            if (ClassLbx.SelectedIndex > -1 && GenderLbx.SelectedIndex > -1)
             {
-                MessageBox.Show("The person must be over 5 years old since logic");
-                return;
-            }
-            if (FirstNameTxt.Text != "" && LastNameTxt.Text != ""
-                && ClassLbx.SelectedIndex > -1 && GenderLbx.SelectedIndex > -1)
-            {
-                _studentRepository.Create(new Student
+                MessageBox.Show(_studentRepository.Create(new Student
                 {
                     FirstName = FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
                     LastName = LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
                     DateOfBirth = DateOfBirthDtp.Value,
                     Class = ClassLbx.SelectedItem as Class,
                     Gender = (Gender) GenderLbx.SelectedItem
-
-                });
+                }));
             }
             else
             {
-                MessageBox.Show("You must fill all parts of the form and choose a gender and class");
+                MessageBox.Show("You must choose a gender and class");
                 return;
             }
-            Close();
         }
 
         //Exiting the form

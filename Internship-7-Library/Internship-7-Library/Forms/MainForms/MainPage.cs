@@ -174,7 +174,7 @@ namespace Internship_7_Library.Forms
             result = MessageBox.Show(message, caption, buttons);
             if (result == DialogResult.No)
                 return;
-            _studentRepository.Delete(StudentLbx.SelectedItem as Student);
+            MessageBox.Show(_studentRepository.Delete(StudentLbx.SelectedItem as Student));
             ClearAndFillForm();
         }
 

@@ -54,7 +54,7 @@ namespace Internship_7_Library.Forms.EditForms
             {
                 if (AuthorLbx.SelectedIndex > -1 && PublisherLbx.SelectedIndex > -1 && GenreLbx.SelectedIndex > -1)
                 {
-                    _bookRepository.Update(new Book
+                    MessageBox.Show(_bookRepository.Update(new Book
                     {
                         Name = NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
                         NumberOfBooksAvailable = int.Parse(NumberOfBooksTxt.Text),
@@ -62,8 +62,7 @@ namespace Internship_7_Library.Forms.EditForms
                         Author = AuthorLbx.SelectedItem as Author,
                         Publisher = PublisherLbx.SelectedItem as Publisher,
                         Genre = (Genre) GenreLbx.SelectedItem
-                    }, _book);
-                    Close();
+                    }, _book));
                 }
                 else
                     MessageBox.Show("All info must be filled/selected");

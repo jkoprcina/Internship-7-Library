@@ -14,15 +14,6 @@ namespace InternshipLibrary.Data.Entities.Models
 
         public ICollection<Book> Books { get; set; }
 
-        public Publisher()
-        {
-        }
-
-        public Publisher(string name)
-        {
-            Name = name;
-        }
-
         public override string ToString()
         {
             return $"{Name}";

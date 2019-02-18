@@ -26,7 +26,7 @@ namespace InternshipLibrary.Data.Entities.Models
 
         public override string ToString()
         {
-            return $"{Name} Author:{Author.FirstName} Publisher:{Publisher.Name} Number:{NumberOfBooksAvailable}";
+            return $"{Name}  Author:{Author.FirstName} Publisher:{Publisher.Name}   Number:{NumberOfBooksAvailable}";
         }
 
         public void AddCopies(int numberToAdd) => NumberOfBooksAvailable += numberToAdd;

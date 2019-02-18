@@ -49,7 +49,7 @@ namespace Internship_7_Library.Forms.AddForms
             {
                 if (AuthorLbx.SelectedIndex > -1 && PublisherLbx.SelectedIndex > -1 && GenreLbx.SelectedIndex > -1)
                 {
-                    _bookRepository.Create(new Book
+                    MessageBox.Show(_bookRepository.Create(new Book
                     {
                         Name = NameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
                         PageNumber = int.Parse(PageNumberTxt.Text),
@@ -57,8 +57,7 @@ namespace Internship_7_Library.Forms.AddForms
                         Publisher = PublisherLbx.SelectedItem as Publisher,
                         Genre = (Genre)GenreLbx.SelectedItem,
                         Author = AuthorLbx.SelectedItem as Author
-                    });
-                    Close();
+                    }));
                 }
                 else
                     MessageBox.Show("You must select one of each list of options");

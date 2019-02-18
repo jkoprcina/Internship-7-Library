@@ -16,34 +16,50 @@ namespace InternshipLibrary.Domain.Repositories
 
         public StudentRepository() => _context = new LibraryContext();
 
-        public void Create(Student student)
+        public string Create(Student student)
         {
+            if (student.CheckIfUnacceptableAtributes(student))
+                return "You must fill all the required fields";
+            if (student.IsNotOldEnough(student.DateOfBirth))
+                return "Student is too young to go to school";
+
             _context.Classes.Attach(student.Class);
             _context.Students.Add(student);
             _context.SaveChanges();
+            return "Successfully created";
         }
 
         public Student Read(int id) => _context.Students.Find(id);
 
-        public List<Student> Read()
-        {
-            return _context.Students.Include(student => student.Class).ToList();
-        }
+        public List<Student> Read() => _context.Students.Include(student => student.Class).ToList();
 
-        public void Update(Student oldStudent, Student newStudent)
+        public string Update(Student newStudent, Student oldStudent)
         {
+            if (newStudent.CheckIfUnacceptableAtributes(newStudent))
+                return "You must fill all the required fields";
+            if (newStudent.IsNotOldEnough(newStudent.DateOfBirth))
+                return "Student is too young to go to school";
+            if (oldStudent.FirstName == newStudent.FirstName && oldStudent.LastName == newStudent.LastName &&
+                oldStudent.Class == newStudent.Class
+                && oldStudent.DateOfBirth == newStudent.DateOfBirth && oldStudent.Gender == newStudent.Gender)
+                return "You made no changes to the student";
+
             oldStudent.FirstName = newStudent.FirstName;
             oldStudent.LastName = newStudent.LastName;
             oldStudent.Class = newStudent.Class;
             oldStudent.DateOfBirth = newStudent.DateOfBirth;
             oldStudent.Gender = newStudent.Gender;
             _context.SaveChanges();
+            return "Successfully updated";
         }
 
-        public void Delete(Student student)
+        public string Delete(Student student)
         {
+            if (_context.Borrowings.Any(x => x.Student == student))
+                return "You can not remove a student until he has returned the borrowed book";
             _context.Students.Remove(student);
             _context.SaveChanges();
+            return "Successfully deleted";
         }
     }
 }

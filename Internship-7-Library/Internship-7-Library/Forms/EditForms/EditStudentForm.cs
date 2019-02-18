@@ -41,24 +41,22 @@ namespace Internship_7_Library.Forms.EditForms
 
         private void EditBtn_Click(object sender, EventArgs e)
         {
-            if (DateOfBirthDtp.Value.Year < 6)
+            if (ClassLbx.SelectedIndex > -1 && GenderLbx.SelectedIndex > -1)
             {
-                MessageBox.Show("The person must be over 5 years old since logic");
-                return;
-            }
-            if (FirstNameTxt.Text != "" && LastNameTxt.Text != ""
-                && ClassLbx.SelectedIndex > -1 && GenderLbx.SelectedIndex > -1)
-            {
-                _studentRepository.Update(_student, new Student(FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
-                    LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(), DateOfBirthDtp.Value,
-                    ClassLbx.SelectedItem as Class, (Gender)GenderLbx.SelectedItem));
+                MessageBox.Show(_studentRepository.Update(new Student
+                {
+                    FirstName = FirstNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
+                    LastName = LastNameTxt.Text.RemoveWhiteSpaces().CapitalizeWords(),
+                    DateOfBirth = DateOfBirthDtp.Value,
+                    Class = ClassLbx.SelectedItem as Class,
+                    Gender = (Gender)GenderLbx.SelectedItem
+                }, _student));
             }
             else
             {
-                MessageBox.Show("You must fill all parts of the form and choose a gender and class");
+                MessageBox.Show("You must choose a gender and class");
                 return;
             }
-            Close();
         }
 
         private void ExitBtn_Click(object sender, EventArgs e) => Close();

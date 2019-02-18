@@ -23,23 +23,24 @@ namespace InternshipLibrary.Data.Entities.Models
         public Class Class { get; set; }
         public ICollection<Borrowing> Borrowings { get; set; }
 
-        public Student (){
-        }
-
-        public Student(string firstName, string lastName, DateTime dateOfBirth, Class schoolClass, Gender gender)
-        {
-            FirstName = firstName;
-            LastName = lastName;
-            DateOfBirth = dateOfBirth;
-            Class = schoolClass;
-            Gender = gender;
-            Loan = 0;
-        }
-
         public override string ToString()
         {
             var bookToWriteOut = "No book";
-            return $"{FirstName} {LastName} {DateOfBirth.Year} {Gender} {Class} {bookToWriteOut}";
+            return $"{FirstName} {LastName} {DateOfBirth.Year}   {Gender} {Class}   {bookToWriteOut} {Loan}";
+        }
+
+        public bool CheckIfUnacceptableAtributes(Student student)
+        {
+            if (student.FirstName == "" || student.LastName == "")
+                return true;
+            return false;
+        }
+
+        public bool IsNotOldEnough(DateTime dateOfBirth)
+        {
+            if (DateTime.Now.Year - DateOfBirth.Year < 6)
+                return true;
+            return false;
         }
     }
 }
